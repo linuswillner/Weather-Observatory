@@ -47,6 +47,10 @@ module.exports = {
     'react-hot-loader/patch',
     path.join(__dirname, '/src/index.jsx')
   ],
+  // Node
+  node: {
+    fs: 'empty'
+  },
   // Loaders
   module: {
     loaders: [

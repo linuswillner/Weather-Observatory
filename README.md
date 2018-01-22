@@ -19,7 +19,9 @@ Reaktorin kesätyön 2018 ennakkotehtävä
 ## Muuta tietoa
 
 Projektin käyttöliittymä pohjautuu Googlen Material-designiin, joka on toteutettu material-ui-komponenttikirjastolla (http://material-ui.com).
-Käyttöliittymässä on myös käytössä Bootstrapin grid-järjestelmä (react-grid-system).
-Styleguidena on käytössä Standard (https://standardjs.com) ja lintterinä ESLint (https://eslint.org).
-Tietokantana toimii Arango (https://arangodb.com).
 
+Käyttöliittymässä on myös käytössä Bootstrapin grid-järjestelmä (react-grid-system).
+
+Styleguidena on käytössä Standard (https://standardjs.com) ja lintterinä ESLint (https://eslint.org).
+
+Tietokantana toimii Lokijs (http://lokijs.org).

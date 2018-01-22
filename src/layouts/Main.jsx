@@ -3,6 +3,8 @@ import React from 'react'
 import { Container, Row, Col } from 'react-grid-system'
 import Navbar from '../components/Navbar'
 import Spacer from '../components/Spacer'
+import { init } from '../system/dbhandler' // For database initialization
+
 const styles = {
   textAlign: 'right'
 }

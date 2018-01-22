@@ -1,12 +1,19 @@
-// Main database handler
-import { Database } from 'arangojs'
-import * as config from '../config'
+import Loki from 'lokijs'
 
-const db = new Database({
-  url: config.arangoUrl || 'http://localhost:8529'
+const db = new Loki('data.db', {
+  env: 'BROWSER',
+  autoload: true,
+  autoloadCallback: init,
+  autosave: true,
+  autosaveInterval: 5000
 })
 
-db.useDatabase(config.arangoDbName || 'weather')
-db.useBasicAuth(config.arangoUser || 'arango', config.arangoPass || '')
+function init () {
+  let weather = db.getCollection('weather')
+  if (weather === null) {
+    weather = db.addCollection('weather')
+    console.log('Initialised database.')
+  } else console.log('Database has been loaded.')
+}
 
-export { db }
+export { db, init }
