@@ -20,7 +20,7 @@ export default class Navbar extends React.Component {
     return (
       <AppBar
         title={'Säähavainnot'}
-        showMenuIconButton={false}
+        showMenuIconButton={true}
         style={styles.appBar}
         iconStyleRight={styles.rightElement}
         iconElementRight={

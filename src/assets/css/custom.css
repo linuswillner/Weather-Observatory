@@ -1,6 +1,7 @@
 /* Global styles */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
   background-color: #90CAF9; /* Material blue200 */

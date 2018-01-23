@@ -35,11 +35,10 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: '8000',
-    noInfo: true,
-    quiet: true,
+    quiet: true, // Remove console spam
     hot: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*' // Allow CORS
     }
   },
   // Entry point
@@ -47,9 +46,12 @@ module.exports = {
     'react-hot-loader/patch',
     path.join(__dirname, '/src/index.jsx')
   ],
-  // Node
+  // Dummies for native Node modules not present in browser scope
   node: {
-    fs: 'empty'
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    crypto: 'empty'
   },
   // Loaders
   module: {

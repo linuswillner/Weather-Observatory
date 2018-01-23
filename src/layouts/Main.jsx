@@ -3,10 +3,16 @@ import React from 'react'
 import { Container, Row, Col } from 'react-grid-system'
 import Navbar from '../components/Navbar'
 import Spacer from '../components/Spacer'
-import { init } from '../system/dbhandler' // For database initialization
+import Map from '../components/Map'
+import { init } from '../system/dbhandler' // For connection checks
 
 const styles = {
-  textAlign: 'right'
+  log: {
+    textAlign: 'right'
+  },
+  map: {
+    height: '500px'
+  }
 }
 
 export default class Main extends React.Component {
@@ -16,18 +22,18 @@ export default class Main extends React.Component {
         <Navbar/>
         <Spacer top="30px"/>
         <Container>
-          <Row>
+          {/* <Row>
             <Col lg={6}>
               Havaintopisteet statseineen
             </Col>
-            <Col lg={6} style={styles}>
+            <Col lg={6} style={styles.log}>
               Viimeisimmät kirjatut merkinnät (loki)
             </Col>
           </Row>
-          <Spacer top="50px"/>
+          <Spacer top="50px"/> */}
           <Row>
-            <Col lg={12}>
-              Kartta tai jotain
+            <Col lg={12} style={styles.map}>
+              <Map/>
             </Col>
           </Row>
         </Container>
