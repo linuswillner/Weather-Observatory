@@ -12,8 +12,8 @@ function init () {
   let weather = db.getCollection('weather')
   if (weather === null) {
     weather = db.addCollection('weather')
-    console.log('Initialised database.')
-  } else console.log('Database has been loaded.')
+    console.debug('Initialised database.')
+  } else console.debug('Database has been loaded.')
 }
 
 export { db, init }

@@ -6,10 +6,11 @@ import Clock from 'react-live-clock'
 
 const styles = {
   appBar: {
-    backgroundColor: Colors.blue900,
-    textAlign: 'left'
+    backgroundColor: Colors.blue900
   },
   rightElement: {
+    color: '#ffffff',
+    fontSize: 22,
     paddingTop: '10px',
     paddingRight: '10px'
   }

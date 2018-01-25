@@ -42,10 +42,12 @@
     "lokijs": "^1.5.1",
     "material-ui": "^0.20.0",
     "prop-types": "^15.6.0",
+    "randstr": "^1.0.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-grid-system": "^3.1.2",
     "react-live-clock": "^2.0.2",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "wolfy87-eventemitter": "^5.2.4"
   }
 }
