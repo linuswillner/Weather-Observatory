@@ -11,13 +11,9 @@ import Tip from './Tip'
 import LocationInfo from './LocationInfo'
 import Spacer from './Spacer'
 import * as config from '../config'
-import { generateComponentKey } from '../system/generators'
 import { dispatcher } from '../system/dispatcher'
 
 const styles = {
-  drawer: {
-    marginTop: 10
-  },
   menuHeader: {
     backgroundColor: Colors.blue900
   }
@@ -46,7 +42,7 @@ export default class WeatherSidebar extends React.Component {
       open: false,
       location: 'None',
       country: 'None',
-      image: '../assets/images/fi.jpg' // Default
+      image: 'http://via.placeholder.com/640x360' // Default
     }
     this.toggle = this.toggle.bind(this)
   }
@@ -71,7 +67,7 @@ export default class WeatherSidebar extends React.Component {
 
     return (
       <div>
-        <Tip dismissable={true} text={'Voit näyttää havaintopisteen tiedot klikaamalla sitä.'}/>
+        <Tip dismissable={true} text={'Voit näyttää havaintopisteen tiedot klikkaamalla sitä.'}/>
         <Drawer
           width={215}
           openSecondary={true}
