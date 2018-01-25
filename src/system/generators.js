@@ -1,3 +1,4 @@
+// Generator functions
 import randstr from 'randstr'
 
 function generateComponentKey () {

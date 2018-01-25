@@ -1,3 +1,5 @@
+// Google map component with markers
+// TODO: Migrate marker class to a separate file for readability
 import React from 'react'
 import Paper from 'material-ui/Paper'
 import * as Colors from 'material-ui/styles/colors'

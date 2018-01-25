@@ -1,4 +1,4 @@
-// Any tokens, passwords etc. for production will be placed in this file
+// Configuration file
 
 const config = {}
 

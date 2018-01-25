@@ -1,4 +1,4 @@
-// The navbar (App bar per Material design)
+// Main navbar
 import React from 'React'
 import AppBar from 'material-ui/AppBar'
 import * as Colors from 'material-ui/styles/colors'

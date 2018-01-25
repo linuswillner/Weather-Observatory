@@ -1,3 +1,4 @@
+// Small tip card
 import React from 'react'
 import Chip from 'material-ui/Chip'
 import Avatar from 'material-ui/Avatar'

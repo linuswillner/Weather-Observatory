@@ -1,3 +1,4 @@
+// Database handler
 import Loki from 'lokijs'
 
 const db = new Loki('data.db', {

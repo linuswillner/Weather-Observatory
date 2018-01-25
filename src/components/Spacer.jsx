@@ -1,4 +1,4 @@
-// Spacer component
+// Spacer
 import React from 'react'
 
 export default class Spacer extends React.Component {

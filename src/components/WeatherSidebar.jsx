@@ -1,3 +1,4 @@
+// Weather information sidebar
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Drawer from 'material-ui/Drawer'
