@@ -38,7 +38,7 @@ export default class Map extends React.Component {
       >
         <GoogleMapReact
           defaultZoom={0}
-          defaultCenter={{ lat: 52.237049, lng: 21.017532 }}
+          defaultCenter={{ lat: 49.988358, lng: 36.232845 }} // Kharkiv, Ukraine
           bootstrapURLKeys={{
             key: config.map.apiKey,
             region: 'fi',

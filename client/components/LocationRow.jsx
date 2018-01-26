@@ -60,7 +60,7 @@ export default class LocationRow extends React.Component {
     else if (temp <= -10 && temp > -25) return cold.subTen
     else if (temp <= -25) return cold.subTwentyFive
 
-    // Otherwise, return default style
+    // The value is zero, so return default style
     else return def
   }
 
