@@ -1,3 +1,4 @@
+// Server-side database handler
 const Dash = require('rethinkdbdash')
 
 const r = new Dash({
