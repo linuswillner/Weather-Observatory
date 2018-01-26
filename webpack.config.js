@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== 'production' && process.argv.indexOf('-p') 
 
 // HTML plugin
 const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: path.join(__dirname, '/src/index.html'),
+  template: path.join(__dirname, '/client/index.html'),
   filename: 'index.html',
   inject: 'body'
 })
@@ -44,7 +44,7 @@ module.exports = {
   // Entry point
   entry: [
     'react-hot-loader/patch',
-    path.join(__dirname, '/src/index.jsx')
+    path.join(__dirname, '/client/index.jsx')
   ],
   // Dummies for native Node modules not present in browser scope
   node: {
@@ -81,7 +81,7 @@ module.exports = {
   // Production build
   output: {
     filename: 'index.js',
-    path: path.join(__dirname, '/build')
+    path: path.join(__dirname, '/public')
   },
   // If in dev, use hot reload and named modules - otherwise generate production code
   plugins: dev ? [ HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin() ] : [ HTMLWebpackPluginConfig, DefinePluginConfig, UglifyJsPluginConfig ]
