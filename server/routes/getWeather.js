@@ -1,3 +1,4 @@
+// Weather data getter route
 const getWeatherData = require('../db/handler.js').getWeatherData
 
 async function getWeather (req, res) {

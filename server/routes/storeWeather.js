@@ -1,3 +1,4 @@
+// Weather data setter route
 const storeWeatherData = require('../db/handler.js').storeWeatherData
 
 async function storeWeather (req, res) {
