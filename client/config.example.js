@@ -3,7 +3,7 @@
 const config = {}
 
 config.map = {
-  apiKey: 'AIzaSyBv73MKTa_z7YWKnKsdICscFg4kkAqm5wo',
+  apiKey: 'something',
   markers: [
     { name: 'Tokio', country: 'Japani', image: 'assets/images/jp.jpg', lat: 35.6584421, lng: 139.7328635 },
     { name: 'Helsinki', country: 'Suomi', image: 'assets/images/fi.jpg', lat: 60.1697530, lng: 24.9490830 },
@@ -12,8 +12,8 @@ config.map = {
     { name: 'Dubai', country: 'Yhdistyneet Arabiemiirikunnat', image: 'assets/images/uae.jpg', lat: 25.092535, lng: 55.1562243 }
   ],
   weatherApi: {
-    user: 'weather-prod',
-    pass: 'KTa_z7YWKnzaSyBv'
+    user: 'something',
+    pass: 'something'
   }
 }
 

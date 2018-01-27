@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const path = require('path')
+const basicAuth = require('express-basic-auth')
 const connectionCheck = require('./db/handler.js').connectionCheck
 const colors = require('colors')
 
@@ -24,13 +25,25 @@ connectionCheck()
 const app = express()
 
 // Modules
-app.use(logger('dev'))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cors())
+app.use(logger('dev')) // Logging
+app.use(bodyParser.urlencoded({ extended: false })) // Body parser
+app.use(bodyParser.json()) // Body parser
+app.use(cors()) // Enable CORS
 app.use(helmet({
-  noCache: true
+  noCache: true // Use Helmet with no cache
 }))
+
+// If in production, require authentication
+if (process.env.NODE_ENV === 'production ') {
+  let user = process.env.API_USER
+  let pass = process.env.API_PASS
+
+  app.use(basicAuth({
+    users: {
+      user: pass
+    }
+  }))
+}
 
 // Error handling
 app.use((err, req, res, next) => {
