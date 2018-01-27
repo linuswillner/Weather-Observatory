@@ -15,23 +15,24 @@ Reaktorin kesätyön 2018 ennakkotehtävä
 |   ├── layouts/ - Applikaation layoutti
 |   ├── system/ - Applikaation backend-koodi
 │   ├── App.jsx - Applikaation perusta
+│   ├── config.example.js - Client-puolen konfiguraatiotiedoston pohja
 │   ├── index.html - HTML-dokumenttipohja applikaatiolle
 │   ├── index.jsx - Applikaation renderöinti
 |
 ├── server/ - Expressillä toteutettu REST API tietosäilönä
 │   ├── db/ - Tietokantamoottori
 │   ├── routes/ - API-reitit
-│   ├── .env.example - Prosessimuuttujat production-tilaa varten
+│   ├── .env.example - Prosessimuuttujat production-tilaa varten (Pohja)
 │   ├── api.js - API-järjestelmän perusta
 ```
 
 ## Käynnistysskriptit
 
-Olettaen että olet jo kloonannut tämän repositorion (`git clone https://github.com/linuswillner/reaktor-kesatyo-2018`):
+Olettaen että olet jo kloonannut tämän repositorion (**git clone https://github.com/linuswillner/reaktor-kesatyo-2018**) sekä luonut tiedostot **server/.env** ja **client/config.js** mallien pohjalta:
 
-`npm start`: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
+**npm start**: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
 
-`npm run start-api`: Käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
+**npm run start-api**: Käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
 
 **Huom:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan!
 
