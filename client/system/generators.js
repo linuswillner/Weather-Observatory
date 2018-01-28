@@ -2,7 +2,7 @@
 import randstr from 'randstr'
 
 function generateComponentKey () {
-  return randstr(6)
+  return randstr(8)
 }
 
 export { generateComponentKey }

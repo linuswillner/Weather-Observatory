@@ -37,12 +37,12 @@ const styles = {
   },
   tooltipHover: {
     position: 'relative',
-    fontSize: 20,
+    fontSize: 20, // Increase font size
     display: 'inline-block',
     whiteSpace: 'nowrap',
-    marginLeft: 20,
+    marginLeft: 20, // Counter font size increase
     padding: 3,
-    top: -85, // Raise
+    top: -85, // Counter font size increase
     cursor: 'default', // Change cursor
     transition: 'all 500ms' // Transition
   }

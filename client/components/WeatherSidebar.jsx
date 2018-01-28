@@ -62,22 +62,19 @@ export default class WeatherSidebar extends React.Component {
   render () {
     dispatcher.on('MARKER_CLICKED', (args) => {
       this.generateLocationInfo(args[0], args[1], args[2])
-      this.toggle()
+      if (this.state.open !== true) this.toggle() // If the drawer is open, don't toggle it
     })
 
     return (
-      <div>
-        <Tip dismissable={true} text={'Voit näyttää havaintopisteen tiedot klikkaamalla sitä.'}/>
-        <Drawer
-          width={215}
-          openSecondary={true}
-          onRequestChange={(open) => this.setState({ open })}
-          open={this.state.open}
-        >
-          <MenuHeader onRequestClose={this.toggle}/>
-          <LocationInfo location={this.state.location} country={this.state.country} image={this.state.image} />
-        </Drawer>
-      </div>
+      <Drawer
+        width={215}
+        openSecondary={true}
+        onRequestChange={(open) => this.setState({ open })}
+        open={this.state.open}
+      >
+        <MenuHeader onRequestClose={this.toggle}/>
+        <LocationInfo location={this.state.location} country={this.state.country} image={this.state.image} />
+      </Drawer>
     )
   }
 }

@@ -26,10 +26,10 @@ export default class Description extends React.Component {
   constructor (props) {
     super(props)
     this.state = { dismissed: false }
-    this.delete = this.delete.bind(this)
+    this.dismiss = this.dismiss.bind(this)
   }
 
-  delete () {
+  dismiss () {
     this.setState({ dismissed: !this.state.dismissed })
   }
 
@@ -38,7 +38,7 @@ export default class Description extends React.Component {
       return (
         <Chip
           style={this.state.dismissed === false ? styles.visible : styles.hidden}
-          onRequestDelete={this.delete}
+          onRequestDelete={this.dismiss}
         >
           <Avatar icon={<i className={'material-icons'}>info_outline</i>}/>
           {this.props.text}

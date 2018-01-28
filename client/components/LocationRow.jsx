@@ -3,6 +3,7 @@ import React from 'react'
 import * as Colors from 'material-ui/styles/colors'
 import { TableRow, TableRowColumn } from 'material-ui/Table'
 import IconButton from 'material-ui/IconButton'
+import { emit } from '../system/dispatcher'
 
 const styles = {
   cold: {
@@ -84,13 +85,6 @@ export default class LocationRow extends React.Component {
           style={this.determineHeatLevel(this.props.lowestTemp)}
         >
           {this.props.lowestTemp}
-        </TableRowColumn>
-        <TableRowColumn>
-          <IconButton
-            style={styles.add}
-          >
-            <i className={'material-icons'}>add</i>
-          </IconButton>
         </TableRowColumn>
       </TableRow>
     )
