@@ -89,9 +89,9 @@ export default class ControlToolbar extends React.Component {
               targetOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               iconButton={<i className={'material-icons'}>arrow_drop_up</i>}
               onChange={(key, value) => {
-                emit('LOCATION_SELECT', [key]) // Re-center map
+                emit('LOCATION_SELECT', [value]) // Re-center map
                 this.select(value) // Select the item in the menu
-                emit('MARKER_CLICKED', [marks[key].name, marks[key].country, marks[key].image]) // Open/update drawer
+                emit('MARKER_CLICKED', [marks[value].name, marks[value].country, marks[value].image]) // Open/update drawer
               }}
             >
               {this.generateListItems()}

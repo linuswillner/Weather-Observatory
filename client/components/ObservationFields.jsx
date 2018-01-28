@@ -2,16 +2,24 @@
 import React from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
+import * as Colors from 'material-ui/styles/colors'
 import { generateComponentKey } from '../system/generators'
 import * as config from '../config'
 
 const selections = config.map.markers.map(loc => loc.name)
 
+const styles = {
+  selected: {
+    color: Colors.blue900,
+    fontWeight: 'bold'
+  }
+}
+
 export default class ObservationFields extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selection: null,
+      selection: this.props.location,
       params: {
         location: null,
         temperature: null
@@ -42,11 +50,11 @@ export default class ObservationFields extends React.Component {
     return (
       <SelectField
         floatingLabelText={'Kaupunki'}
-        value={this.state.selection === null ? this.props.location : this.state.selection}
-        // TODO: Make this actually work http://images.lwtechgaming.me/ZBmzx0f.gif
-        onChange={(key, value) => { this.select(value) }}
+        value={this.state.selection}
+        onChange={(key, value) => { this.select(--value) }} // Correct the offset created by the null field
+        selectedMenuItemStyle={styles.selected}
       >
-        <MenuItem value={null} primaryText={''}/>
+        <MenuItem value={null} primaryText={''}/> {/* TODO: If this field is explicitly selected, display error and disable submit */}
         {this.generateListItems()}
       </SelectField>
     )
