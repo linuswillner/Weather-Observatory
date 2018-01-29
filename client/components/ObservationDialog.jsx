@@ -10,13 +10,21 @@ import { dispatcher } from '../system/dispatcher'
 const styles = {
   submit: {
     color: Colors.blue900
+  },
+  submitDisabled: {
+    color: Colors.grey500,
+    cursor: 'not-allowed'
   }
 }
 
 export default class ObservationDialog extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { open: false, selection: null }
+    this.state = {
+      open: false,
+      disabled: false,
+      selection: null
+    }
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
   }
@@ -34,15 +42,13 @@ export default class ObservationDialog extends React.Component {
     this.setState({ open: false })
   }
 
-  // Open request must be done via an event emission from any of the buttons mentioned
   render () {
-    dispatcher.on('REQUEST_DIALOG', (args) => {
-      let preSelect
-      if (!args) this.open() // No origin
-      else { // Origin provided
-        preSelect = args[0]
-        this.open(preSelect)
-      }
+    dispatcher.on('REQUEST_DIALOG', (arg) => {
+      !arg ? this.open() : this.open(arg) // If no arg was provided, there was no origin - otherwise open the origin
+    })
+
+    dispatcher.on('DISABLE_SUBMIT', (arg) => {
+      this.setState({ disabled: arg })
     })
 
     return (
@@ -58,7 +64,8 @@ export default class ObservationDialog extends React.Component {
           />,
           <FlatButton
             label={'Tallenna'}
-            style={styles.submit}
+            style={this.state.disabled ? styles.submitDisabled : styles.submit}
+            disabled={this.state.disabled}
             onClick={this.close} // Submit data to API
           />
         ]}

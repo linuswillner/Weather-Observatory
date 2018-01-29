@@ -1,6 +1,8 @@
 # reaktor-kesatyo-2018
 
-Reaktorin kesätyön 2018 ennakkotehtävä
+Reaktorin kesätyön 2018 ennakkotehtävään tehty säähavaintosovellus.
+
+Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tietoa siitä miten tekninen toteutus on suoritettu, katso [DOC.md](DOC.md).
 
 ## Struktuuri
 

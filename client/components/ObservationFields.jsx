@@ -1,9 +1,11 @@
 // Fields for the observation dialog component
 import React from 'react'
 import SelectField from 'material-ui/SelectField'
+import TextField from 'material-ui/TextField'
 import MenuItem from 'material-ui/MenuItem'
 import * as Colors from 'material-ui/styles/colors'
 import { generateComponentKey } from '../system/generators'
+import { emitOne } from '../system/dispatcher'
 import * as config from '../config'
 
 const selections = config.map.markers.map(loc => loc.name)
@@ -12,6 +14,12 @@ const styles = {
   selected: {
     color: Colors.blue900,
     fontWeight: 'bold'
+  },
+  labelFocused: {
+    color: Colors.blue900
+  },
+  underlineFocused: {
+    borderColor: Colors.blue900
   }
 }
 
@@ -20,6 +28,8 @@ export default class ObservationFields extends React.Component {
     super(props)
     this.state = {
       selection: this.props.location,
+      nulled: false,
+      selectionName: this.props.location !== null ? config.map.markers[this.props.location].name : null,
       params: {
         location: null,
         temperature: null
@@ -29,7 +39,13 @@ export default class ObservationFields extends React.Component {
   }
 
   select (value) {
-    this.setState({ selection: value })
+    if (value === -1) { // Null field
+      emitOne('DISABLE_SUBMIT', true) // Disable submit
+      this.setState({ selection: value, nulled: true })
+    } else {
+      emitOne('DISABLE_SUBMIT', false) // Re-enable submit
+      this.setState({ selection: value, nulled: false })
+    }
   }
 
   generateListItems () {
@@ -48,16 +64,34 @@ export default class ObservationFields extends React.Component {
 
   render () {
     return (
-      <SelectField
-        floatingLabelText={'Kaupunki'}
-        value={this.state.selection}
-        onChange={(key, value) => { this.select(--value) }} // Correct the offset created by the null field
-        selectedMenuItemStyle={styles.selected}
-      >
-        <MenuItem value={null} primaryText={''}/>
-        {/* TODO: If this field is explicitly selected, display error and disable submit */}
-        {this.generateListItems()}
-      </SelectField>
+      <div>
+        <SelectField
+          floatingLabelText={'Kaupunki'}
+          floatingLabelFixed={true}
+          floatingLabelFocusStyle={styles.labelFocused}
+          underlineFocusStyle={styles.underlineFocused}
+          selectedMenuItemStyle={styles.selected}
+          value={this.state.selection}
+          onChange={(key, value) => { this.select(--value) }} // Correct the offset created by the null field
+          errorText={this.state.nulled && 'Ole hyvä ja valitse kaupunki'}
+        >
+          <MenuItem value={null} primaryText={''}/>
+          {this.generateListItems()}
+        </SelectField>
+        <br/>
+        <TextField
+          hintText={'Tämänhetkinen lämpötila...'}
+          floatingLabelText={'Lämpötila'}
+          floatingLabelFixed={true}
+          type={'number'}
+          onChange={(event, newValue) => {
+            // Prevent screwing with the API by modifying the modal via the element inspector
+            isNaN(newValue) ? emitOne('DISABLE_SUBMIT', true) : emitOne('DISABLE_SUBMIT', false)
+          }}
+          floatingLabelFocusStyle={styles.labelFocused}
+          underlineFocusStyle={styles.underlineFocused}
+        />
+      </div>
     )
   }
 }

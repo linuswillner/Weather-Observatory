@@ -11,7 +11,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import Toggle from 'material-ui/Toggle'
 import * as config from '../config'
 import { generateComponentKey } from '../system/generators'
-import { emit } from '../system/dispatcher'
+import { emit, emitOne } from '../system/dispatcher'
 
 const styles = {
   toolbar: {
@@ -42,13 +42,17 @@ const styles = {
 export default class ControlToolbar extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { selection: 3, tableViewEnabled: false }
+    this.state = {
+      selection: 3,
+      tableViewEnabled: false
+    }
     this.select = this.select.bind(this)
     this.toggleTableView = this.toggleTableView.bind(this)
   }
 
   toggleTableView () {
     this.setState({ tableViewEnabled: !this.state.tableViewEnabled })
+    emitOne('TOGGLE_TABLE_VIEW')
   }
 
   generateListItems () {
@@ -89,7 +93,7 @@ export default class ControlToolbar extends React.Component {
               targetOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               iconButton={<i className={'material-icons'}>arrow_drop_up</i>}
               onChange={(key, value) => {
-                emit('LOCATION_SELECT', [value]) // Re-center map
+                emitOne('LOCATION_SELECT', value) // Re-center map
                 this.select(value) // Select the item in the menu
                 emit('MARKER_CLICKED', [marks[value].name, marks[value].country, marks[value].image]) // Open/update drawer
               }}
@@ -101,7 +105,7 @@ export default class ControlToolbar extends React.Component {
           <ToolbarGroup>
             <RaisedButton
               label={'Lisää säähavainto'}
-              onClick={() => { emit('REQUEST_DIALOG') }}
+              onClick={() => { emitOne('REQUEST_DIALOG') }}
             />
           </ToolbarGroup>
           {/* Toggle between table and map view */}

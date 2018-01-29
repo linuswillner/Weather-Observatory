@@ -42,7 +42,7 @@ export default class WeatherSidebar extends React.Component {
       open: false,
       location: 'None',
       country: 'None',
-      image: 'http://via.placeholder.com/640x360' // Default
+      image: require('../assets/images/loading.png') // Loading image for slow connections
     }
     this.toggle = this.toggle.bind(this)
   }

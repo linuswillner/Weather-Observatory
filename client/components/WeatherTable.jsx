@@ -5,11 +5,27 @@ import Paper from 'material-ui/Paper'
 import LocationRow from './LocationRow'
 import * as config from '../config.js'
 import { generateComponentKey } from '../system/generators'
+import { dispatcher } from '../system/dispatcher'
+
+const styles = {
+  visible: {
+    display: 'inline'
+  },
+  hidden: {
+    display: 'none'
+  }
+}
 
 export default class WeatherTable extends React.Component {
   constructor (props) {
     super(props)
+    this.state = { visible: false }
     this.generateColumns = this.generateColumns.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
+  }
+
+  toggleVisibility () {
+    this.setState({ visible: !this.state.visible })
   }
 
   generateColumns (temperatures) {
@@ -27,8 +43,13 @@ export default class WeatherTable extends React.Component {
   }
 
   render () {
+    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
+      this.toggleVisibility()
+    })
+
     return (
       <Paper
+        style={this.state.visible ? styles.visible : styles.hidden}
         zDepth={2}
       >
         <Table>

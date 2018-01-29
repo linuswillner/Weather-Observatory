@@ -9,8 +9,12 @@ import { generateComponentKey } from '../system/generators'
 import { dispatcher, emit } from '../system/dispatcher'
 
 const styles = {
-  mapContainer: {
+  visible: {
     height: 500
+  },
+  hidden: {
+    height: 500,
+    display: 'none'
   }
 }
 
@@ -18,12 +22,18 @@ export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      visible: true,
       center: {
         lat: config.map.markers[3].lat,
         lng: config.map.markers[3].lng
       }
     }
     this.changeCenter = this.changeCenter.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
+  }
+
+  toggleVisibility () {
+    this.setState({ visible: !this.state.visible })
   }
 
   changeCenter (value) {
@@ -51,12 +61,17 @@ export default class Map extends React.Component {
   }
 
   render () {
-    dispatcher.on('LOCATION_SELECT', args => {
-      this.changeCenter(args[0])
+    dispatcher.on('LOCATION_SELECT', (arg) => {
+      this.changeCenter(arg)
     })
+
+    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
+      this.toggleVisibility()
+    })
+
     return (
       <Paper
-        style={styles.mapContainer}
+        style={this.state.visible ? styles.visible : styles.hidden }
         zDepth={2}
       >
         <GoogleMapReact
