@@ -54,7 +54,8 @@ export default class ObservationFields extends React.Component {
         onChange={(key, value) => { this.select(--value) }} // Correct the offset created by the null field
         selectedMenuItemStyle={styles.selected}
       >
-        <MenuItem value={null} primaryText={''}/> {/* TODO: If this field is explicitly selected, display error and disable submit */}
+        <MenuItem value={null} primaryText={''}/>
+        {/* TODO: If this field is explicitly selected, display error and disable submit */}
         {this.generateListItems()}
       </SelectField>
     )
