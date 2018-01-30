@@ -12,8 +12,8 @@ const styles = {
     top: -35,
     left: -21,
     // Color
-    color: 'red', // Colors.redA700
-    transition: 'all 500ms'
+    color: 'red',
+    transition: 'all 200ms'
   },
   iconHover: {
     position: 'relative',
@@ -22,7 +22,7 @@ const styles = {
     top: -45, // Counter ^
     color: 'red', // Brighten
     cursor: 'pointer', // Change cursor
-    transition: 'all 500ms' // Transition
+    transition: 'all 200ms' // Transition
   },
   tooltip: {
     // Position & dimensions
@@ -44,7 +44,7 @@ const styles = {
     padding: 3,
     top: -85, // Counter font size increase
     cursor: 'default', // Change cursor
-    transition: 'all 500ms' // Transition
+    transition: 'all 200ms' // Transition
   }
 }
 

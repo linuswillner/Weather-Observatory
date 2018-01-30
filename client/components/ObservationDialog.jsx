@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import * as Colors from 'material-ui/styles/colors'
 import ObservationFields from './ObservationFields'
 import * as config from '../config'
-import { dispatcher } from '../system/dispatcher'
+import { dispatcher, emit, emitOne } from '../system/dispatcher'
 
 const styles = {
   submit: {
@@ -22,7 +22,7 @@ export default class ObservationDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      disabled: false,
+      disabled: true,
       selection: null
     }
     this.open = this.open.bind(this)
@@ -60,13 +60,16 @@ export default class ObservationDialog extends React.Component {
         actions={[
           <FlatButton
             label={'Peruuta'}
-            onClick={this.close}
+            onClick={() => {
+              this.setState({ selection: null }) // Used for emptying the field for the next opening
+              this.close()
+            }}
           />,
           <FlatButton
             label={'Tallenna'}
             style={this.state.disabled ? styles.submitDisabled : styles.submit}
             disabled={this.state.disabled}
-            onClick={this.close} // Submit data to API
+            onClick={() => { console.log('get input info') }}
           />
         ]}
       >

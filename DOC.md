@@ -8,7 +8,7 @@ Tässä dokumentissa valotan työni teknisiä konsepteja sekä miten koko sovell
 
 Yleistoteutus on suoritettu Reactilla ja sen perustoimintoja kuten props- ja state-järjestelmiä käytetään useasti. Tässä projektissa olen tavallisesta poiketen rakentanut järjestelmän jossa eri komponentit "keskustelevat" toistensa kanssa.
 
-Käytännössä kyseessä on browser-käyttöön tarkoitettu EventEmitteri, Node.js:n inspiraatiosta. Sen koodi tulee NPM-paketista **wolfy87-eventemitter**, ja tässä projektissa sitä on abstraktoitu hyvin kevyesti käytön helpottamiseksi (Funktiot `emit()` ja `emitOne()`).
+Käytännössä kyseessä on browser-käyttöön tarkoitettu EventEmitteri, Node.js:n inspiraatiosta. Sen koodi tulee NPM-paketista **wolfy87-eventemitter**, ja tässä projektissa sitä on abstraktoitu hyvin kevyesti käytön helpottamiseksi (Funktiot **emit()** ja **emitOne()**, client/system/dispatcher.js).
 
 Tämä tarkoittaa sitä että ohjelmoidessa ei tarvitse miettiä kuinka monta komponenttia ylöspäin jokin pitää propsien kautta lähettää, vaan signaaleja ja lisätietoja voi lähettää komponenttien välillä hierarkiasta riippumatta.
 
@@ -22,6 +22,7 @@ Event-pohjaisen konseptin ainoa huono puoli on se että eventit, niiden lähett�
 | REQUEST_DIALOG | ControlToolbar.jsx, LocationInfo.jsx | ObservationDialog.jsx | Avaa dialogin säähavainnon kirjaamiseen. |
 | LOCATION_SELECT | ControlToolbar.jsx | Map.jsx | Muuttaa kartan keskusta valitun havaintopisteen perusteella. |
 | MARKER_CLICKED | ControlToolbar.jsx*, Marker.jsx | WeatherSidebar.jsx | Avaa ja sulkee sivupaneelin jossa havaintopisteen tiedot ovat. |
+| DISABLE_SUBMIT | ObservationFields.jsx | ObservationDialog.jsx | Sammuttaa ja käynnistää Tallenna-napin annettujen tietojen perusteella. |
 
 *: ControlToolbar.jsx lähettää eventin MARKER\_CLICKED (Ilman käyttäjän pyyntöä) eventin LOCATION\_SELECT ohella avatakseen sivupaneelin automaattisesti.
 
