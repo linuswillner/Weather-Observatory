@@ -39,7 +39,7 @@ const styles = {
   }
 }
 
-export default class LocationRow extends React.Component {
+export default class WeatherTableRow extends React.Component {
   constructor (props) {
     super(props)
     this.determineHeatLevel = this.determineHeatLevel.bind(this)

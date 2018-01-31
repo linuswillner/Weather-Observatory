@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom'
 // The curly braces are necessary - the app will not render properly otherwise
 
 // CSS
-import './assets/css/custom.css'
+import './assets/css/common.css'
 
 // Layouts
 import Main from './layouts/Main'

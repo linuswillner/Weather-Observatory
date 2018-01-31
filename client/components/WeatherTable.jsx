@@ -2,9 +2,9 @@
 import React from 'react'
 import { Table, TableHeader, TableBody, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import Paper from 'material-ui/Paper'
-import LocationRow from './LocationRow'
+import WeatherTableRow from './WeatherTableRow'
 import * as config from '../config.js'
-import { generateComponentKey } from '../system/generators'
+import { generateComponentKey } from '../system/utils'
 import { dispatcher } from '../system/dispatcher'
 
 const styles = {
@@ -31,7 +31,7 @@ export default class WeatherTable extends React.Component {
   generateColumns (temperatures) {
     return config.map.markers.map(location => {
       return (
-        <LocationRow
+        <WeatherTableRow
           location={location.name}
           currentTemp={3}
           highestTemp={6}

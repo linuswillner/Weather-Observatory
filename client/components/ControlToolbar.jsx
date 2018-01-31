@@ -10,7 +10,7 @@ import Paper from 'material-ui/Paper'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 import Toggle from 'material-ui/Toggle'
 import * as config from '../config'
-import { generateComponentKey } from '../system/generators'
+import { generateComponentKey } from '../system/utils'
 import { emit, emitOne } from '../system/dispatcher'
 
 const styles = {

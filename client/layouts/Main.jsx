@@ -8,6 +8,7 @@ import WeatherSidebar from '../components/WeatherSidebar'
 import WeatherTable from '../components/WeatherTable'
 import ObservationDialog from '../components/ObservationDialog'
 import ControlToolbar from '../components/ControlToolbar'
+import Alert from '../components/Alert'
 import { dispatcher } from '../system/dispatcher'
 
 const styles = {
@@ -49,8 +50,10 @@ export default class Main extends React.Component {
           <Row>
             <Col lg={12}>
               <ControlToolbar/>
+              {/* Hidden components called via events */}
               <ObservationDialog/>
               <WeatherSidebar/>
+              <Alert/>
             </Col>
           </Row>
         </Container>

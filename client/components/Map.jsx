@@ -3,9 +3,9 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import * as Colors from 'material-ui/styles/colors'
 import GoogleMapReact from 'google-map-react'
-import Marker from './Marker'
+import MapMarker from './MapMarker'
 import * as config from '../config'
-import { generateComponentKey } from '../system/generators'
+import { generateComponentKey } from '../system/utils'
 import { dispatcher, emit } from '../system/dispatcher'
 
 const styles = {
@@ -48,7 +48,7 @@ export default class Map extends React.Component {
   generateMarkers () {
     return config.map.markers.map(location => {
       return (
-        <Marker
+        <MapMarker
           text={location.name}
           country={location.country}
           image={location.image}

@@ -3,9 +3,11 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import * as Colors from 'material-ui/styles/colors'
-import ObservationFields from './ObservationFields'
+import TemperatureField from './TemperatureField'
+import LocationPicker from './LocationPicker'
 import * as config from '../config'
 import { dispatcher, emit, emitOne } from '../system/dispatcher'
+import { removeLocalStorageItems } from '../system/utils'
 
 const styles = {
   submit: {
@@ -42,12 +44,29 @@ export default class ObservationDialog extends React.Component {
     this.setState({ open: false })
   }
 
+  checkAndSubmit () {
+    let locName = localStorage.getItem('locationName')
+    let temp = localStorage.getItem('temperature')
+
+    // It's not feasible that these conditions will fire in normal usage - they're more for proofing against tampering the local storage
+    if (!locName || locName.match(/Tokio|Helsinki|New York|Amsterdam|Dubai/gi) === null) {
+      emit('REQUEST_ALERT', ['Hupsista!', 'Syöttämäsi kaupunki ei kelpaa. Ole hyvä ja valitse kaupunki listasta.'])
+      emitOne('SUBMIT_STATE_CHANGE', true)
+    } else if (!temp || isNaN(temp)) {
+      emit('REQUEST_ALERT', ['Hupsista!', 'Syöttämäsi lämpötila ei kelpaa. Ole hyvä ja syötä lämpötila numerona kenttään.'])
+      emitOne('SUBMIT_STATE_CHANGE', true)
+    } else {
+      // Submit data to API
+      removeLocalStorageItems([ 'locatioName', 'locationIndex', 'temperature' ])
+    }
+  }
+
   render () {
     dispatcher.on('REQUEST_DIALOG', (arg) => {
       !arg ? this.open() : this.open(arg) // If no arg was provided, there was no origin - otherwise open the origin
     })
 
-    dispatcher.on('DISABLE_SUBMIT', (arg) => {
+    dispatcher.on('SUBMIT_STATE_CHANGE', (arg) => {
       this.setState({ disabled: arg })
     })
 
@@ -61,7 +80,8 @@ export default class ObservationDialog extends React.Component {
           <FlatButton
             label={'Peruuta'}
             onClick={() => {
-              this.setState({ selection: null }) // Used for emptying the field for the next opening
+              this.setState({ selection: null }) // Empty the field for the next opening
+              removeLocalStorageItems([ 'locatioName', 'locationIndex', 'temperature' ]) // Purge cached info
               this.close()
             }}
           />,
@@ -69,11 +89,15 @@ export default class ObservationDialog extends React.Component {
             label={'Tallenna'}
             style={this.state.disabled ? styles.submitDisabled : styles.submit}
             disabled={this.state.disabled}
-            onClick={() => { console.log('get input info') }}
+            onClick={this.checkAndSubmit}
           />
         ]}
       >
-        <ObservationFields location={this.state.selection}/>
+        <div>
+          <LocationPicker location={this.state.selection}/>
+          <br/>
+          <TemperatureField/>
+        </div>
       </Dialog>
     )
   }

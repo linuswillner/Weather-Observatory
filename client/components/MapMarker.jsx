@@ -48,7 +48,7 @@ const styles = {
   }
 }
 
-export default class Marker extends React.Component {
+export default class MapMarker extends React.Component {
   constructor (props) {
     super(props)
     this.state = { hovered: false }
