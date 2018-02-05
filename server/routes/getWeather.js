@@ -16,7 +16,7 @@ async function getWeather (req, res) {
   let data = await getWeatherData(req.params.location)
 
   if (data === null) res.status(500).send({ message: 'An error occurred while storing the data' })
-  else res.status(200).send({ data: data })
+  else res.status(200).send(data)
 }
 
 module.exports = getWeather

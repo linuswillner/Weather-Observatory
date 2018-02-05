@@ -61,11 +61,11 @@ export default class Map extends React.Component {
   }
 
   render () {
-    dispatcher.on('LOCATION_SELECT', (arg) => {
+    dispatcher.once('LOCATION_SELECT', (arg) => {
       this.changeCenter(arg)
     })
 
-    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
+    dispatcher.once('TOGGLE_TABLE_VIEW', () => {
       this.toggleVisibility()
     })
 

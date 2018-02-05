@@ -50,6 +50,9 @@ export default class WeatherTableRow extends React.Component {
     let cold = styles.cold
     let def = styles.default
 
+    // Ignore NaN values
+    if (isNaN(temp)) return def
+
     // Check warm
     if (temp > 0 && temp < 10) return warm.plusZero
     else if (temp >= 10 && temp < 25) return warm.plusTen

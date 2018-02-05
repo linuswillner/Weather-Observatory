@@ -24,23 +24,35 @@ export default class TemperatureField extends React.Component {
     super(props)
     this.state = {
       modified: false,
-      noTemp: false
+      noTemp: false,
+      invalid: false
     }
     this.check = this.check.bind(this)
   }
 
+  removeAndDisable (item) {
+    localStorage.removeItem(item)
+    emitOne('SUBMIT_STATE_CHANGE', true)
+  }
+
   // Security measure against modifying the input field via the element inspector
   check (value) {
-    if (!value) { // Debug measure against emptying the field
+    if (value) value = value.replace(',', '.') // Anti-crash
+
+    if (!value) {
+      // Debug measure against emptying the field
       this.setState({ noTemp: true })
-      localStorage.removeItem('temperature')
-      emitOne('SUBMIT_STATE_CHANGE', true)
-    } else if (isNaN(value)) { // Prevent modification and input of rogue data to the field
+      this.removeAndDisable('temperature')
+    } else if (isNaN(value)) {
+      // Prevent modification and input of rogue data to the field
       this.setState({ modified: true })
-      localStorage.removeItem('temperature')
-      emitOne('SUBMIT_STATE_CHANGE', true)
+      this.removeAndDisable('temperature')
+    } else if (value < -273.15 || value > 60) {
+      // Absolute zero and a little more than the hottest place on Earth, Death Valley
+      this.setState({ invalid: true })
+      this.removeAndDisable('temperature')
     } else {
-      this.setState({ modified: false, noTemp: false })
+      this.setState({ modified: false, noTemp: false, invalid: false })
       localStorage.setItem('temperature', value)
       // Submission will not be enabled unless all values are present
       if (localStorage.getItem('locationName') && localStorage.getItem('locationIndex')) emitOne('SUBMIT_STATE_CHANGE', false)
@@ -50,11 +62,14 @@ export default class TemperatureField extends React.Component {
   render () {
     return (
       <TextField
-        hintText={'Tämänhetkinen lämpötila...'}
         floatingLabelText={'Lämpötila (°C)'}
         floatingLabelFixed={true}
         type={'number'}
-        errorText={(this.state.noTemp && 'Ole hyvä ja syötä lämpötila.') || (this.state.modified && 'Antamasi lämpötila on viallinen, päivitä sivu ja yritä uudelleen.')}
+        errorText={
+          (this.state.noTemp && 'Ole hyvä ja syötä lämpötila.') ||
+          (this.state.modified && 'Antamasi lämpötila on viallinen, päivitä sivu ja yritä uudelleen.') ||
+          (this.state.invalid && 'Antamasi lämpötila on virheellinen, ole hyvä ja syötä mahdollinen lämpötila.')
+        }
         onChange={(event, newValue) => {
           this.check(newValue)
         }}

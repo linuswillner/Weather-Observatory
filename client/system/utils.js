@@ -11,4 +11,9 @@ function removeLocalStorageItems (keys) {
   })
 }
 
-export { generateComponentKey, removeLocalStorageItems }
+function isOlderThan24Hours (storedTime, newTime) {
+  if (Math.abs(storedTime - newTime) / 360000 === 24) return true
+  else return false
+}
+
+export { generateComponentKey, removeLocalStorageItems, isOlderThan24Hours }

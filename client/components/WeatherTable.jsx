@@ -4,8 +4,9 @@ import { Table, TableHeader, TableBody, TableHeaderColumn, TableRow, TableRowCol
 import Paper from 'material-ui/Paper'
 import WeatherTableRow from './WeatherTableRow'
 import * as config from '../config.js'
-import { generateComponentKey } from '../system/utils'
+import { generateComponentKey, isOlderThan24Hours } from '../system/utils'
 import { dispatcher } from '../system/dispatcher'
+import { getAllWeatherInfo } from '../system/apiHandler'
 
 const styles = {
   visible: {
@@ -20,7 +21,6 @@ export default class WeatherTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = { visible: false }
-    this.generateColumns = this.generateColumns.bind(this)
     this.toggleVisibility = this.toggleVisibility.bind(this)
   }
 
@@ -28,23 +28,30 @@ export default class WeatherTable extends React.Component {
     this.setState({ visible: !this.state.visible })
   }
 
-  generateColumns (temperatures) {
+  generateColumns () {
+    getAllWeatherInfo()
     return config.map.markers.map(location => {
+      let data = localStorage.getItem(location.name)
+      if (data) data = JSON.parse(data)
       return (
         <WeatherTableRow
           location={location.name}
-          currentTemp={3}
-          highestTemp={6}
-          lowestTemp={-4}
-          key={this.props.location + '-' + generateComponentKey()}
+          currentTemp={data.temperature ? data.temperature : '-'}
+          highestTemp={data.highest ? isOlderThan24Hours(data.lastModified, Date.now()) ? '-' : data.highest : '-'}
+          lowestTemp={data.highest ? isOlderThan24Hours(data.lastModified, Date.now()) ? '-' : data.lowest : '-'}
+          key={location.name + '-' + generateComponentKey()}
         />
       )
     })
   }
 
   render () {
-    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
+    dispatcher.once('TOGGLE_TABLE_VIEW', () => {
       this.toggleVisibility()
+    })
+
+    dispatcher.once('NEW_DATA', () => {
+      this.forceUpdate()
     })
 
     return (

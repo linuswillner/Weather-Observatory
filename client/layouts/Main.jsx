@@ -9,7 +9,10 @@ import WeatherTable from '../components/WeatherTable'
 import ObservationDialog from '../components/ObservationDialog'
 import ControlToolbar from '../components/ControlToolbar'
 import Alert from '../components/Alert'
-import { dispatcher } from '../system/dispatcher'
+import ErrorOverlay from '../components/ErrorOverlay'
+import { dispatcher, emit } from '../system/dispatcher'
+import { ping, getAllWeatherInfo } from '../system/apiHandler'
+import * as config from '../config'
 
 const styles = {
   col: {
@@ -27,12 +30,20 @@ export default class Main extends React.Component {
     this.toggleTableView = this.toggleTableView.bind(this)
   }
 
+  componentWillMount () {
+    getAllWeatherInfo()
+  }
+
+  componentDidMount () {
+    ping()
+  }
+
   toggleTableView () {
     this.setState({ tableViewEnabled: !this.state.tableViewEnabled })
   }
 
   render () {
-    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
+    dispatcher.once('TOGGLE_TABLE_VIEW', () => {
       this.toggleTableView()
     })
 
@@ -54,6 +65,7 @@ export default class Main extends React.Component {
               <ObservationDialog/>
               <WeatherSidebar/>
               <Alert/>
+              <ErrorOverlay/>
             </Col>
           </Row>
         </Container>

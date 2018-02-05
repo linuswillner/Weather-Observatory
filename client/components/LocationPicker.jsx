@@ -26,7 +26,7 @@ const styles = {
 export default class LocationPicker extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { selection: null, nulled: false }
+    this.state = { selection: this.props.selection || null, nulled: false }
     this.select = this.select.bind(this)
   }
 
@@ -63,6 +63,11 @@ export default class LocationPicker extends React.Component {
   }
 
   render () {
+    if (this.props.selection) {
+      localStorage.setItem('locationName', config.map.markers[this.props.selection].name)
+      localStorage.setItem('locationIndex', this.props.selection)
+    }
+
     return (
       <SelectField
         floatingLabelText={'Kaupunki'}

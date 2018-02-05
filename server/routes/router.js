@@ -2,11 +2,20 @@
 const router = require('express').Router()
 
 // Routes
+const getAll = require('./getAll.js')
 const getWeather = require('./getWeather.js')
-const storeWeather = require('./storeWeather')
+const storeWeather = require('./storeWeather.js')
 
 router.all('/', (req, res) => {
-  res.status(404).send('No location provided!')
+  res.status(400).send('No location provided!')
+})
+
+router.get('/ping', (req, res) => {
+  res.status(200).send('Pong!')
+})
+
+router.get('/all', (req, res) => {
+  getAll(req, res)
 })
 
 router.get('/:location', (req, res) => {

@@ -32,7 +32,7 @@ export default class Alert extends React.Component {
   }
 
   render () {
-    dispatcher.on('REQUEST_ALERT', (args) => {
+    dispatcher.once('REQUEST_ALERT', (args) => {
       this.setState({
         title: args[0] || 'Virhe',
         content: args[1]

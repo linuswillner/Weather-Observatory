@@ -9,7 +9,7 @@ Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tiet
 ```
 |
 ├── bin/ - Kehityksessä käytettävät binääritiedostot
-│   ├── rethinkdb.exe - Kehitykseen tarkoitettu RethinkDB-binääri
+│   └── rethinkdb.exe - Kehitykseen tarkoitettu RethinkDB-binääri
 |
 ├── client/ - Reactilla rakennettu web-applikaatio
 │   ├── assets/ - Kuvat sekä CSS
@@ -19,24 +19,27 @@ Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tiet
 │   ├── App.jsx - Applikaation perusta
 │   ├── config.example.js - Client-puolen konfiguraatiotiedoston pohja
 │   ├── index.html - HTML-dokumenttipohja applikaatiolle
-│   ├── index.jsx - Applikaation renderöinti
+│   └── index.jsx - Applikaation renderöinti
 |
 ├── server/ - Expressillä toteutettu REST API tietosäilönä
 │   ├── db/ - Tietokantamoottori
 │   ├── routes/ - API-reitit
 │   ├── .env.example - Prosessimuuttujat production-tilaa varten (Pohja)
-│   ├── api.js - API-järjestelmän perusta
+│   └── api.js - API-järjestelmän perusta
 ```
 
 ## Käynnistysskriptit
 
-Olettaen että olet jo kloonannut tämän repositorion (**git clone https://github.com/linuswillner/reaktor-kesatyo-2018**) sekä luonut tiedostot **server/.env** ja **client/config.js** mallien pohjalta:
+Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
 
-**npm start**: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
+- Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/reaktor-kesatyo-2018**
+- Luonut tiedostot **server/.env** ja **client/config.js** niiden mallien pohjalta
 
-**npm run start-api**: Käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
+**npm start** käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
 
-**Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan!
+**npm run start-api**: käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
+
+**Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan. Muista myös luoda tietokanta **Weather** ja siihen taulukko **Observations**.
 
 ## Muuta tietoa
 

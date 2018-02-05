@@ -12,6 +12,7 @@ import LocationInfo from './LocationInfo'
 import Spacer from './Spacer'
 import * as config from '../config'
 import { dispatcher } from '../system/dispatcher'
+import { getWeatherInfo } from '../system/apiHandler'
 
 const styles = {
   menuHeader: {
@@ -42,16 +43,17 @@ export default class WeatherSidebar extends React.Component {
       open: false,
       location: 'None',
       country: 'None',
-      image: require('../assets/images/loading.png') // Loading image for slow connections
+      image: require('../assets/images/loading.png')
     }
     this.toggle = this.toggle.bind(this)
   }
 
   generateLocationInfo (locationName, locationCountry, locationImagePath) {
+    let image = require(`../${locationImagePath}`)
     this.setState({
       location: locationName,
       country: locationCountry,
-      image: require(`../${locationImagePath}`)
+      image: image
     })
   }
 
@@ -60,7 +62,7 @@ export default class WeatherSidebar extends React.Component {
   }
 
   render () {
-    dispatcher.on('MARKER_CLICKED', (args) => {
+    dispatcher.once('MARKER_CLICKED', (args) => {
       this.generateLocationInfo(args[0], args[1], args[2])
       if (this.state.open !== true) this.toggle() // If the drawer is open, don't toggle it
     })
@@ -73,7 +75,11 @@ export default class WeatherSidebar extends React.Component {
         open={this.state.open}
       >
         <MenuHeader onRequestClose={this.toggle}/>
-        <LocationInfo location={this.state.location} country={this.state.country} image={this.state.image} />
+        <LocationInfo
+          location={this.state.location}
+          country={this.state.country}
+          image={this.state.image}
+        />
       </Drawer>
     )
   }

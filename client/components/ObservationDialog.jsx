@@ -8,6 +8,7 @@ import LocationPicker from './LocationPicker'
 import * as config from '../config'
 import { dispatcher, emit, emitOne } from '../system/dispatcher'
 import { removeLocalStorageItems } from '../system/utils'
+import { postWeatherInfo } from '../system/apiHandler'
 
 const styles = {
   submit: {
@@ -29,6 +30,7 @@ export default class ObservationDialog extends React.Component {
     }
     this.open = this.open.bind(this)
     this.close = this.close.bind(this)
+    this.checkAndSubmit = this.checkAndSubmit.bind(this)
   }
 
   // Open handled via event due to it being called from another component
@@ -56,17 +58,18 @@ export default class ObservationDialog extends React.Component {
       emit('REQUEST_ALERT', ['Hupsista!', 'Syöttämäsi lämpötila ei kelpaa. Ole hyvä ja syötä lämpötila numerona kenttään.'])
       emitOne('SUBMIT_STATE_CHANGE', true)
     } else {
-      // Submit data to API
-      removeLocalStorageItems([ 'locatioName', 'locationIndex', 'temperature' ])
+      postWeatherInfo(locName, temp, Date.now())
+      removeLocalStorageItems([ 'locationName', 'locationIndex', 'temperature' ])
+      this.close()
     }
   }
 
   render () {
-    dispatcher.on('REQUEST_DIALOG', (arg) => {
+    dispatcher.once('REQUEST_DIALOG', (arg) => {
       !arg ? this.open() : this.open(arg) // If no arg was provided, there was no origin - otherwise open the origin
     })
 
-    dispatcher.on('SUBMIT_STATE_CHANGE', (arg) => {
+    dispatcher.once('SUBMIT_STATE_CHANGE', (arg) => {
       this.setState({ disabled: arg })
     })
 
@@ -81,7 +84,7 @@ export default class ObservationDialog extends React.Component {
             label={'Peruuta'}
             onClick={() => {
               this.setState({ selection: null }) // Empty the field for the next opening
-              removeLocalStorageItems([ 'locatioName', 'locationIndex', 'temperature' ]) // Purge cached info
+              removeLocalStorageItems([ 'locationName', 'locationIndex', 'temperature' ]) // Purge cached info
               this.close()
             }}
           />,
@@ -94,7 +97,7 @@ export default class ObservationDialog extends React.Component {
         ]}
       >
         <div>
-          <LocationPicker location={this.state.selection}/>
+          <LocationPicker selection={this.state.selection}/>
           <br/>
           <TemperatureField/>
         </div>
