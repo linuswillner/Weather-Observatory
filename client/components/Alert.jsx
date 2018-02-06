@@ -54,7 +54,7 @@ export default class Alert extends React.Component {
         }
       >
         <h1>{this.state.title}</h1>
-        <p>{this.state.content}</p>
+        {this.state.content}
       </Dialog>
     )
   }

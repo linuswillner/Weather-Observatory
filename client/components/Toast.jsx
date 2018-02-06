@@ -12,16 +12,10 @@ export default class Toast extends React.Component {
       action: ''
     }
     this.close = this.close.bind(this)
-    this.actionClick = this.actionClick.bind(this)
   }
 
   close () {
     this.setState({ open: false })
-  }
-
-  actionClick () {
-    window.open('http://bit.ly/2EKWqE1', '_blank')
-    this.close()
   }
 
   render () {
@@ -38,7 +32,7 @@ export default class Toast extends React.Component {
         open={this.state.open}
         action={this.state.action}
         message={this.state.msg}
-        onActionClick={this.actionClick}
+        onActionClick={this.close}
       />
     )
   }

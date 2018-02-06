@@ -40,10 +40,13 @@ function getWeatherInfo (location) {
       emitOne('NEW_DATA', res.body.id)
     })
     .catch(err => {
-      console.error(`An error occurred during getWeatherInfo: ${err.message}`)
-      emit('REQUEST_TOAST', [
-        'Applikaatiossa tapahtui virhe. Ole hyvä ja seuraa seuraavaa ohjetta.',
-        'Avaa'
+      emit('REQUEST_ALERT', [
+        'Virhe',
+        [
+          <p>Applikaatiossa tapahtui virhe. Ole hyvä ja ilmoita tästä sivuston omistajalle (<b>hello@linuswillner.me</b>).</p>,
+          <p>Lähetä seuraava ilmoituksesi mukana.</p>,
+          <p><b>getWeatherInfo:</b> {err.message}</p>
+        ]
       ])
     })
 }
@@ -77,10 +80,13 @@ function postWeatherInfo (location, temperature, createdAt) {
       }
     })
     .catch(err => {
-      console.error(`An error occurred during postWeatherInfo: ${err.message}`)
-      emit('REQUEST_TOAST', [
-        'Applikaatiossa tapahtui virhe. Ole hyvä ja seuraa seuraavaa ohjetta.',
-        'Avaa'
+      emit('REQUEST_ALERT', [
+        'Virhe',
+        [
+          <p>Applikaatiossa tapahtui virhe. Ole hyvä ja ilmoita tästä sivuston omistajalle (<b>hello@linuswillner.me</b>).</p>,
+          <p>Lähetä seuraava ilmoituksesi mukana.</p>,
+          <p><b>postWeatherInfo:</b> {err.message}</p>
+        ]
       ])
     })
 }

@@ -52,10 +52,10 @@ export default class ObservationDialog extends React.Component {
 
     // It's not feasible that these conditions will fire in normal usage - they're more for proofing against tampering the local storage
     if (!locName || locName.match(/Tokio|Helsinki|New York|Amsterdam|Dubai/gi) === null) {
-      emit('REQUEST_ALERT', ['Hupsista!', 'Syöttämäsi kaupunki ei kelpaa. Ole hyvä ja valitse kaupunki listasta.'])
+      emit('REQUEST_ALERT', ['Hupsista!', <p>Syöttämäsi kaupunki ei kelpaa. Ole hyvä ja valitse kaupunki listasta.</p>])
       emitOne('SUBMIT_STATE_CHANGE', true)
     } else if (!temp || isNaN(temp)) {
-      emit('REQUEST_ALERT', ['Hupsista!', 'Syöttämäsi lämpötila ei kelpaa. Ole hyvä ja syötä lämpötila numerona kenttään.'])
+      emit('REQUEST_ALERT', ['Hupsista!', <p>Syöttämäsi lämpötila ei kelpaa. Ole hyvä ja syötä lämpötila numerona kenttään.</p>])
       emitOne('SUBMIT_STATE_CHANGE', true)
     } else {
       postWeatherInfo(locName, temp, Date.now())

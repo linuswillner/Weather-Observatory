@@ -29,7 +29,6 @@ export default class WeatherTable extends React.Component {
   }
 
   generateColumns () {
-    getAllWeatherInfo()
     return config.map.markers.map(location => {
       let data = localStorage.getItem(location.name)
       if (data) data = JSON.parse(data)
@@ -37,8 +36,8 @@ export default class WeatherTable extends React.Component {
         <WeatherTableRow
           location={location.name}
           currentTemp={data.temperature ? data.temperature : '-'}
-          highestTemp={data.highest ? isOlderThan24Hours(data.lastUpdate) ? '-' : data.highest : '-'}
-          lowestTemp={data.highest ? isOlderThan24Hours(data.lastUpdate) ? '-' : data.lowest : '-'}
+          highestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.highest : '-'}
+          lowestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.lowest : '-' }
           key={location.name + '-' + generateComponentKey()}
         />
       )

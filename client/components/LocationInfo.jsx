@@ -3,9 +3,11 @@ import React from 'react'
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import * as Colors from 'material-ui/styles/colors'
+import Spacer from './Spacer'
 import * as config from '../config'
 import { dispatcher, emitOne } from '../system/dispatcher'
-import { getWeatherInfo } from '../system/apiHandler';
+import { getWeatherInfo } from '../system/apiHandler'
+import { isOlderThan24Hours } from '../system/utils'
 
 const styles = {
   cold: {
@@ -36,6 +38,10 @@ const styles = {
   },
   default: {
     color: 'inherit'
+  },
+  tipText: {
+    color: 'gray',
+    fontWeight: 'lighter'
   }
 }
 
@@ -55,21 +61,21 @@ export default class LocationInfo extends React.Component {
     let cold = styles.cold
     let def = styles.default
 
-    // Ignore NaN values
     if (isNaN(temp)) return def
+    else {
+      // Check warm
+      if (temp > 0 && temp < 10) return warm.plusZero
+      else if (temp >= 10 && temp < 25) return warm.plusTen
+      else if (temp >= 25) return warm.plusTwentyFive
 
-    // Check warm
-    if (temp > 0 && temp < 10) return warm.plusZero
-    else if (temp >= 10 && temp < 25) return warm.plusTen
-    else if (temp >= 25) return warm.plusTwentyFive
+      // Check cold
+      else if (temp < 0 && temp > -10) return cold.subZero
+      else if (temp <= -10 && temp > -25) return cold.subTen
+      else if (temp <= -25) return cold.subTwentyFive
 
-    // Check cold
-    else if (temp < 0 && temp > -10) return cold.subZero
-    else if (temp <= -10 && temp > -25) return cold.subTen
-    else if (temp <= -25) return cold.subTwentyFive
-
-    // The value is zero, so return default style
-    else return def
+      // The value is zero, so return default style
+      else return def
+    }
   }
 
   render () {
@@ -81,6 +87,7 @@ export default class LocationInfo extends React.Component {
         if (this.state.location !== this.props.location) {
           this.setState({
             location: this.props.location,
+            lastUpdate: data.lastUpdate,
             temperature: data.temperature,
             highestTemp: data.highest,
             lowestTemp: data.lowest
@@ -90,6 +97,7 @@ export default class LocationInfo extends React.Component {
     })
 
     dispatcher.once('MARKER_CLICKED', (args) => {
+      // Potential leak here, this may get registered several times
       getWeatherInfo(args[0])
     })
 
@@ -111,15 +119,19 @@ export default class LocationInfo extends React.Component {
           </p>
           <p>
             Korkein lämpötila (24h):
-            <span style={this.determineHeatLevel(this.state.highestTemp)}>
-              {` ${this.state.highestTemp ? this.state.highestTemp : '-'}`}
+            <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.highestTemp)}>
+              {` ${this.state.highestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.highestTemp : '-'}`}
             </span>
           </p>
           <p>
             Matalin lämpötila (24h):
-            <span style={this.determineHeatLevel(this.state.lowestTemp)}>
-              {` ${this.state.lowestTemp ? this.state.lowestTemp : '-'}`}
+            <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.lowestTemp)}>
+              {` ${this.state.lowestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.lowestTemp : '-'}`}
             </span>
+          </p>
+          <p style={styles.tipText}>
+            <br/>
+            Jos kentät ovat tyhjiä, ei tietoja ole kirjattu viimeisen 24 tunnin aikana.
           </p>
         </CardText>
         <CardActions>

@@ -45,8 +45,12 @@ export default class Main extends React.Component {
   }
 
   render () {
-    dispatcher.once('TOGGLE_TABLE_VIEW', () => {
+    dispatcher.on('TOGGLE_TABLE_VIEW', () => {
       this.toggleTableView()
+      if (!localStorage.getItem('disableTableToast')) {
+        emit('REQUEST_TOAST', ['Jos kentät ovat tyhjiä, ei tietoja ole kirjattu viimeisen 24 tunnin aikana.', 'Sulje'])
+        localStorage.setItem('disableTableToast', true) // Only show once
+      }
     })
 
     return (
