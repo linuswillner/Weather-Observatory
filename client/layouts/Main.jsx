@@ -10,6 +10,8 @@ import ObservationDialog from '../components/ObservationDialog'
 import ControlToolbar from '../components/ControlToolbar'
 import Alert from '../components/Alert'
 import ErrorOverlay from '../components/ErrorOverlay'
+import Toast from '../components/Toast'
+import Tip from '../components/Tip'
 import { dispatcher, emit } from '../system/dispatcher'
 import { ping, getAllWeatherInfo } from '../system/apiHandler'
 import * as config from '../config'
@@ -50,7 +52,7 @@ export default class Main extends React.Component {
     return (
       <div>
         <Navbar/>
-        <Spacer top={'40px'}/>
+        <Spacer top={30}/>
         <Container>
           <Row>
             <Col lg={12} style={this.state.tableViewEnabled ? styles.lowCol : styles.col}>
@@ -61,11 +63,14 @@ export default class Main extends React.Component {
           <Row>
             <Col lg={12}>
               <ControlToolbar/>
+              <div>&nbsp;</div> {/* Shadow fix */}
+
               {/* Hidden components called via events */}
               <ObservationDialog/>
               <WeatherSidebar/>
               <Alert/>
               <ErrorOverlay/>
+              <Toast/>
             </Col>
           </Row>
         </Container>

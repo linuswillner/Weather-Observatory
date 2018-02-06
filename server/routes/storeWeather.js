@@ -13,11 +13,11 @@ async function storeWeather (req, res) {
   // All of this is already checked client-side, but this is just an extra verification layer
 
   if (isNaN(req.body.temperature)) { // Checking that temperature is a number
-    res.status(400).send('Temperature was not a number!')
+    res.status(400).send({ message: 'Temperature was not a number!' })
   } else if (isNaN(req.body.createdAt)) { // Checking that the time of creation is Date.now()
-    res.status(400).send('Time of creation was not an integer!')
+    res.status(400).send({ message: 'Time of creation was not a number!' })
   } else if (req.params.location.match(cityRegex) === null) { // Checking that the location is valid
-    res.status(400).send('Location was not one of the following: Tokio, Helsinki, New York, Amsterdam, Dubai')
+    res.status(400).send({ message: 'Location was not one of the following: Tokio, Helsinki, New York, Amsterdam, Dubai' })
   } else {
     let data = await storeWeatherData(req.params.location, req.body.temperature, req.body.createdAt)
 

@@ -11,8 +11,9 @@ function removeLocalStorageItems (keys) {
   })
 }
 
-function isOlderThan24Hours (storedTime, newTime) {
-  if (Math.abs(storedTime - newTime) / 360000 === 24) return true
+function isOlderThan24Hours (time) {
+  let oneDay = (60 * 60 * 1000) * 24
+  if ((Date.now() - time) > oneDay) return true
   else return false
 }
 

@@ -23,10 +23,7 @@ export default class Map extends React.Component {
     super(props)
     this.state = {
       visible: true,
-      center: {
-        lat: config.map.markers[3].lat,
-        lng: config.map.markers[3].lng
-      }
+      center: null
     }
     this.changeCenter = this.changeCenter.bind(this)
     this.toggleVisibility = this.toggleVisibility.bind(this)

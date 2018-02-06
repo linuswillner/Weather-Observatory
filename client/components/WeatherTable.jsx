@@ -37,8 +37,8 @@ export default class WeatherTable extends React.Component {
         <WeatherTableRow
           location={location.name}
           currentTemp={data.temperature ? data.temperature : '-'}
-          highestTemp={data.highest ? isOlderThan24Hours(data.lastModified, Date.now()) ? '-' : data.highest : '-'}
-          lowestTemp={data.highest ? isOlderThan24Hours(data.lastModified, Date.now()) ? '-' : data.lowest : '-'}
+          highestTemp={data.highest ? isOlderThan24Hours(data.lastUpdate) ? '-' : data.highest : '-'}
+          lowestTemp={data.highest ? isOlderThan24Hours(data.lastUpdate) ? '-' : data.lowest : '-'}
           key={location.name + '-' + generateComponentKey()}
         />
       )

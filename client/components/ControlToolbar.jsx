@@ -16,7 +16,7 @@ import { emit, emitOne } from '../system/dispatcher'
 const styles = {
   toolbar: {
     backgroundColor: Colors.blue900,
-    marginTop: 20
+    marginTop: 15
   },
   menu: {
     paddingBottom: 5

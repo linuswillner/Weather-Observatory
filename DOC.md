@@ -14,8 +14,6 @@ Tämä tarkoittaa sitä että tietojen lähetys ei mene propsien tai callback-fu
 
 Event-pohjaisen konseptin ainoa huono puoli on se että eventit, niiden lähettäjät ja vastaanottajat on dokumentoitava jotenkin jotta ohjelmoija voi saada selvää mikä tekee mitäkin. Lista eventeistä tietoineen on alla.
 
-**Huomautus:** Ainoastaan layout- ja komponettitiedostot lähettävät ja vastaanottavat eventtejä.
-
 | Eventti | Parametrit | Lähettäjä(t) | Vastaanottaja(t) | Tarkoitus |
 | ------- | ---------- | ------------ | ---------------- | --------- |
 | TOGGLE\_TABLE\_VIEW | | ControlToolbar.jsx | Map.jsx, WeatherTable.jsx, Main.jsx | Vaihtaa kartta- ja taulukkotilan välillä. |
@@ -24,6 +22,8 @@ Event-pohjaisen konseptin ainoa huono puoli on se että eventit, niiden lähett�
 | MARKER_CLICKED | [ Paikan nimi, maa, kuva ] | ControlToolbar.jsx*, MapMarker.jsx | WeatherSidebar.jsx | Avaa ja sulkee sivupaneelin jossa havaintopisteen tiedot ovat. |
 | SUBMIT\_STATE\_CHANGE | true/false (True = pois, false = päälle) | LocationPicker.jsx, TemperatureField.jsx | ObservationDialog.jsx | Vaihtaa Tallenna-napin tilaa. |
 | REQUEST_ALERT | [ Otsikko tai ei mitään, sisältö ] | ObservationDialog.jsx | Alert.jsx | Näyttää geneerisen alertin jos jokin menee vikaan applikaatiossa. |
+| REQUEST\_ERROR\_OVERLAY | [ Viesti, tarkemmat tiedot, koodi ] | apiHandler.js | ErrorOverlay.jsx | Näyttää dialogin jota ei voi sulkea. Tarkoitettu suuriin virheisiin. |
+| NEW_DATA | Paikan nimi | apiHandler.js | WeatherTable.jsx, LocationInfo.jsx | Ilmoittaa että uutta tietoa on vastaanotettu API:sta. |
 
 *: ControlToolbar.jsx lähettää eventin MARKER\_CLICKED (Ilman käyttäjän pyyntöä) eventin LOCATION\_SELECT ohella avatakseen sivupaneelin automaattisesti.
 
@@ -53,8 +53,10 @@ Ennen lähetystä API:lle sovellus tarkistaa vielä kerran että tiedot ovat pai
 
 ### Serveripuolen turvallisuus ja syöttövalidaatio
 
-Koska kyseessä on suhteellisen yksinkertainen web-sovellus, vaatii API ainoastaan tunnistautumisen käyttäjänimen ja salasanan kautta. Nämä voidaan määrittää tiedostossa [server/.env](server/.env.example). API:n osoitetta ei myöskään näytetä käyttäjälle missään vaiheessa.
+Koska kyseessä on suhteellisen yksinkertainen web-sovellus, vaatii API ainoastaan tunnistautumisen käyttäjänimen ja salasanan kautta (Basic authentication). Nämä voidaan määrittää tiedostossa [server/.env](server/.env.example).
 
 **Huomautus:** Kehitystilassa (Kun NODE_ENV = development) API ei vaadi tunnistautumista yksinkertaisuuden vuoksi. Vasta produktiotilassa tunnistautuminen kytketään päälle.
 
 Jos käyttäjä kaikesta huolimatta löytäisi API:n, suorittaa API saman syöttövalidaation kuin client-puolella ennen tallennusta tietokantaan (Vrt. havaintodialogia ([client/components/ObservationDialog.jsx](client/components/ObservationDialog.jsx), funktio checkAndSubmit(), viivat 47-62) sekä säätietojen tallennusta API:ssa ([server/routes/storeWeather.js](server/routes/storeWeather.js), viivat 11-20)).
+
+RethinkDB-tietokantaa käytetään hard durability-tilassa (https://rethinkdb.com/docs/consistency/#settings). Lisäksi sille voidaan määrittää erillinen osoite serverin .env-konfiguraatiossa. Tämä tarkoittaa sitä, että se voidaan asettaa serverille joka on erillään API-serveristä, täten lisäten datan turvallisuustasoa. RethinkDB-serveriä voidaan myös käyttää cluster-tilassa, mutta sitä en ole tässä tehnyt.

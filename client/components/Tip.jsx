@@ -40,7 +40,6 @@ export default class Description extends React.Component {
           style={this.state.dismissed === false ? styles.visible : styles.hidden}
           onRequestDelete={this.dismiss}
         >
-          <Avatar icon={<i className={'material-icons'}>info_outline</i>}/>
           {this.props.text}
         </Chip>
       )
@@ -49,7 +48,6 @@ export default class Description extends React.Component {
         <Chip
           style={this.state.dismissed === false ? styles.visible : styles.hidden}
         >
-          <Avatar icon={<i className={'material-icons'}>priority_high</i>}/>
           {this.props.text}
         </Chip>
       )

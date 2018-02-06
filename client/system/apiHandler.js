@@ -14,16 +14,17 @@ function ping () {
       return true
     })
     .catch(err => {
-      let error = {
-        res: err.response || null,
-        msg: err.message
-      }
-
-      if (error.msg.includes('the network is offline')) {
+      if (err.message.includes('the network is offline')) {
         emit('REQUEST_ERROR_OVERLAY', [
           'Yhteyttä API:hin ei voitu muodostaa. (net::ERR_CONNECTION_REFUSED)',
-          error.msg,
-          'Scythe'
+          err.message,
+          'Lynx'
+        ])
+      } else {
+        emit('REQUEST_ERROR_OVERLAY', [
+          'API:ssa tapahtui virhe. (Unknown exception)',
+          err.message,
+          'Canis'
         ])
       }
     })
@@ -39,7 +40,11 @@ function getWeatherInfo (location) {
       emitOne('NEW_DATA', res.body.id)
     })
     .catch(err => {
-      console.error(`Msg: ${err.message}\nRes: ${err.response}`)
+      console.error(`An error occurred during getWeatherInfo: ${err.message}`)
+      emit('REQUEST_TOAST', [
+        'Applikaatiossa tapahtui virhe. Ole hyvä ja seuraa seuraavaa ohjetta.',
+        'Avaa'
+      ])
     })
 }
 
@@ -72,7 +77,11 @@ function postWeatherInfo (location, temperature, createdAt) {
       }
     })
     .catch(err => {
-      console.error(`Msg: ${err.message}\nRes: ${err.response}`)
+      console.error(`An error occurred during postWeatherInfo: ${err.message}`)
+      emit('REQUEST_TOAST', [
+        'Applikaatiossa tapahtui virhe. Ole hyvä ja seuraa seuraavaa ohjetta.',
+        'Avaa'
+      ])
     })
 }
 

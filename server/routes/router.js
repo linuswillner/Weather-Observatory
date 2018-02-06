@@ -11,7 +11,7 @@ router.all('/', (req, res) => {
 })
 
 router.get('/ping', (req, res) => {
-  res.status(200).send('Pong!')
+  res.status(200).send({ message: 'Pong!' })
 })
 
 router.get('/all', (req, res) => {
@@ -19,14 +19,14 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/:location', (req, res) => {
-  if (!req.params.location) res.status(400).send('No location provided!')
+  if (!req.params.location) res.status(400).send({ message: 'No location provided!' })
   else getWeather(req, res)
 })
 
 router.post('/:location', (req, res) => {
-  if (!req.params.location) res.status(400).send('No location provided!')
-  else if (!req.body.temperature) res.status(400).send('No temperature provided!')
-  else if (!req.body.createdAt) res.status(400).send('No creation time provided!')
+  if (!req.params.location) res.status(400).send({ message: 'No location provided!' })
+  else if (!req.body.temperature) res.status(400).send({ message: 'No temperature provided!' })
+  else if (!req.body.createdAt) res.status(400).send({ message: 'No creation time provided!' })
   else storeWeather(req, res)
 })
 
