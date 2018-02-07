@@ -83,6 +83,14 @@ module.exports = {
     filename: 'index.js',
     path: path.join(__dirname, '/public')
   },
-  // If in dev, use hot reload and named modules - otherwise generate production code
-  plugins: dev ? [ HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin() ] : [ HTMLWebpackPluginConfig, DefinePluginConfig, UglifyJsPluginConfig ]
+  plugins:
+    dev ? [ // Development - use hot reload and named modules
+      HTMLWebpackPluginConfig,
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin()
+    ] : [ // Production - generate public build
+      HTMLWebpackPluginConfig,
+      DefinePluginConfig,
+      UglifyJsPluginConfig
+    ]
 }

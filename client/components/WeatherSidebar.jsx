@@ -1,5 +1,6 @@
 // Weather information sidebar
 import React from 'react'
+import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
@@ -24,12 +25,9 @@ class MenuHeader extends React.Component {
   render () {
     return (
       <AppBar
-        title={this.props.title}
         showMenuIconButton={true}
         style={styles.menuHeader}
-        iconElementLeft={
-          <IconButton iconClassName={'material-icons'}>close</IconButton>
-        }
+        iconElementLeft={<IconButton iconClassName={'material-icons'}>close</IconButton>}
         onLeftIconButtonClick={this.props.onRequestClose}
       />
     )
@@ -83,4 +81,8 @@ export default class WeatherSidebar extends React.Component {
       </Drawer>
     )
   }
+}
+
+MenuHeader.propTypes = {
+  onRequestClose: PropTypes.func.isRequired
 }

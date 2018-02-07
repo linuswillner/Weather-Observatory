@@ -50,7 +50,7 @@ export default class WeatherTable extends React.Component {
     })
 
     dispatcher.once('NEW_DATA', () => {
-      this.forceUpdate()
+      this.forceUpdate() // Re-render when new data comes in
     })
 
     return (

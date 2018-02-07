@@ -17,14 +17,14 @@ Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tiet
 |   ├── layouts/ - Applikaation layoutti
 |   ├── system/ - Applikaation backend-koodi
 │   ├── App.jsx - Applikaation perusta
-│   ├── config.example.js - Client-puolen konfiguraatiotiedoston pohja
+│   ├── config.example.js - Client-puolen konfiguraatiotiedosto (Malli)
 │   ├── index.html - HTML-dokumenttipohja applikaatiolle
 │   └── index.jsx - Applikaation renderöinti
 |
 ├── server/ - Expressillä toteutettu REST API tietosäilönä
 │   ├── db/ - Tietokantamoottori
 │   ├── routes/ - API-reitit
-│   ├── .env.example - Prosessimuuttujat production-tilaa varten (Pohja)
+│   ├── .env.example - Prosessimuuttujat production-tilaa varten (Malli)
 │   └── api.js - API-järjestelmän perusta
 ```
 
@@ -41,12 +41,12 @@ Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
 
 **Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan. Muista myös luoda tietokanta **Weather** ja siihen taulukko **Observations**.
 
-## Muuta tietoa
+## Käytettyjä teknologioita
 
-Projektin käyttöliittymä pohjautuu Googlen Material-designiin, joka on toteutettu material-ui-komponenttikirjastolla (http://material-ui.com).
+Perustana on perinteinen React-applikaatio (React DOM, Babel, Webpack).
 
-Käyttöliittymässä on myös käytössä Bootstrapin grid-järjestelmä (react-grid-system).
+Projektin käyttöliittymä pohjautuu Googlen Material-designiin, joka on toteutettu material-ui-komponenttikirjastolla (http://material-ui.com). Käyttöliittymässä on myös käytössä Bootstrapin grid-järjestelmä (https://npmjs.com/package/react-grid-system).
 
 Styleguidena on käytössä Standard (https://standardjs.com) ja lintterinä ESLint (https://eslint.org).
 
-Tietokantana toimii RethinkDB (https://rethinkdb.com) ja tiedot siirretään sivulta serveripuolelle Express.js:llä (https://expressjs.com/).
+Tietokantana toimii RethinkDB (https://rethinkdb.com) ja client-server-kommunikaatio on suoritettu Express.js:llä (https://expressjs.com).

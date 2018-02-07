@@ -1,5 +1,6 @@
 // Alert component
 import React from 'react'
+import PropTypes from 'prop-types'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import * as Colors from 'material-ui/styles/colors'
@@ -58,4 +59,10 @@ export default class Alert extends React.Component {
       </Dialog>
     )
   }
+}
+
+Alert.propTypes = {
+  title: PropTypes.string,
+  content: PropTypes.node
+  // Not enforced due to them not being defined on load
 }

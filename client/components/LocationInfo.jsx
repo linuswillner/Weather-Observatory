@@ -1,5 +1,6 @@
 // Location information card for the sidebar
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import * as Colors from 'material-ui/styles/colors'
@@ -97,7 +98,7 @@ export default class LocationInfo extends React.Component {
     })
 
     dispatcher.once('MARKER_CLICKED', (args) => {
-      // Potential leak here, this may get registered several times
+      // Potential leak here, this may get registered multiple times
       getWeatherInfo(args[0])
     })
 
@@ -119,12 +120,14 @@ export default class LocationInfo extends React.Component {
           </p>
           <p>
             Korkein lämpötila (24h):
+            {/* If the data is older than 24 hours, don't style the span */}
             <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.highestTemp)}>
               {` ${this.state.highestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.highestTemp : '-'}`}
             </span>
           </p>
           <p>
             Matalin lämpötila (24h):
+            {/* If the data is older than 24 hours, don't style the span */}
             <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.lowestTemp)}>
               {` ${this.state.lowestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.lowestTemp : '-'}`}
             </span>
@@ -144,4 +147,10 @@ export default class LocationInfo extends React.Component {
       </Card>
     )
   }
+}
+
+LocationInfo.propTypes = {
+  location: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  image: PropTypes.node.isRequired // Should be a require()'d image
 }

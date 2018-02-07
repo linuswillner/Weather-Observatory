@@ -1,5 +1,6 @@
 // Map marker and tooltip component
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as Colors from 'material-ui/styles/colors'
 import Paper from 'material-ui/Paper'
 import { emit } from '../system/dispatcher'
@@ -89,4 +90,10 @@ export default class MapMarker extends React.Component {
       </span>
     )
   }
+}
+
+MapMarker.propTypes = {
+  text: PropTypes.node.isRequired,
+  country: PropTypes.string.isRequired,
+  image: PropTypes.node.isRequired
 }

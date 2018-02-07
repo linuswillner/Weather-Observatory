@@ -1,5 +1,6 @@
 // Location picker for the observation dialog
 import React from 'react'
+import PropTypes from 'prop-types'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import * as Colors from 'material-ui/styles/colors'
@@ -87,4 +88,8 @@ export default class LocationPicker extends React.Component {
       </SelectField>
     )
   }
+}
+
+LocationPicker.propTypes = {
+  selection: PropTypes.number // Not required because of the possiblity of it being null
 }

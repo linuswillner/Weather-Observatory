@@ -21,9 +21,10 @@ Event-pohjaisen konseptin ainoa huono puoli on se että eventit, niiden lähett�
 | LOCATION_SELECT | Paikan array-indeksi | ControlToolbar.jsx | Map.jsx | Muuttaa kartan keskusta valitun havaintopisteen perusteella. |
 | MARKER_CLICKED | [ Paikan nimi, maa, kuva ] | ControlToolbar.jsx*, MapMarker.jsx | WeatherSidebar.jsx | Avaa ja sulkee sivupaneelin jossa havaintopisteen tiedot ovat. |
 | SUBMIT\_STATE\_CHANGE | true/false (True = pois, false = päälle) | LocationPicker.jsx, TemperatureField.jsx | ObservationDialog.jsx | Vaihtaa Tallenna-napin tilaa. |
-| REQUEST_ALERT | [ Otsikko tai ei mitään, sisältö ] | ObservationDialog.jsx | Alert.jsx | Näyttää geneerisen alertin jos jokin menee vikaan applikaatiossa. |
-| REQUEST\_ERROR\_OVERLAY | [ Viesti, tarkemmat tiedot, koodi ] | apiHandler.js | ErrorOverlay.jsx | Näyttää dialogin jota ei voi sulkea. Tarkoitettu suuriin virheisiin. |
+| REQUEST_ALERT | [ Otsikko tai ei mitään, sisältö (JSX tuettu) ] | ObservationDialog.jsx | Alert.jsx | Näyttää geneerisen alertin jos jokin menee vikaan applikaatiossa. |
+| REQUEST\_ERROR\_OVERLAY | [ Viesti, tarkemmat tiedot, koodi ] | apiHandler.js | ErrorOverlay.jsx | Näyttää dialogin jota ei voi sulkea. Suurille virheille. |
 | NEW_DATA | Paikan nimi | apiHandler.js | WeatherTable.jsx, LocationInfo.jsx | Ilmoittaa että uutta tietoa on vastaanotettu API:sta. |
+| REQUEST_TOAST | [ Teksti, napin teksti ] | Main.jsx | Toast.jsx | Näyttää pienen popupin näytön alareunassa. Lyhyttä tietoa varten. |
 
 *: ControlToolbar.jsx lähettää eventin MARKER\_CLICKED (Ilman käyttäjän pyyntöä) eventin LOCATION\_SELECT ohella avatakseen sivupaneelin automaattisesti.
 

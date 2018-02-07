@@ -76,7 +76,7 @@ export default class Map extends React.Component {
           defaultCenter={{ // Amsterdam
             lat: config.map.markers[3].lat,
             lng: config.map.markers[3].lng
-          }}
+          }} // TODO: Stop this component from whining when it's re-rendered and thus defaultCenter is reassigned
           center={this.state.center}
           bootstrapURLKeys={{
             key: config.map.apiKey,

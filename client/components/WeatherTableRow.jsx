@@ -1,5 +1,6 @@
 // Location table row component
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as Colors from 'material-ui/styles/colors'
 import { TableRow, TableRowColumn } from 'material-ui/Table'
 import IconButton from 'material-ui/IconButton'
@@ -91,4 +92,11 @@ export default class WeatherTableRow extends React.Component {
       </TableRow>
     )
   }
+}
+
+WeatherTableRow.propTypes = {
+  location: PropTypes.string.isRequired,
+  currentTemp: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+  highestTemp: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+  lowestTemp: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ])
 }

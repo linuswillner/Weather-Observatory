@@ -1,5 +1,6 @@
 // Small tip card
 import React from 'react'
+import PropTypes from 'prop-types'
 import Chip from 'material-ui/Chip'
 import Avatar from 'material-ui/Avatar'
 
@@ -53,4 +54,9 @@ export default class Description extends React.Component {
       )
     }
   }
+}
+
+Description.propTypes = {
+  dismissable: PropTypes.bool,
+  text: PropTypes.node
 }

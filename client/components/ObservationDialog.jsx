@@ -50,7 +50,7 @@ export default class ObservationDialog extends React.Component {
     let locName = localStorage.getItem('locationName')
     let temp = localStorage.getItem('temperature')
 
-    // It's not feasible that these conditions will fire in normal usage - they're more for proofing against tampering the local storage
+    // It's not feasible that these conditions will fire in normal usage - they're mostly proofing against tampering the local storage
     if (!locName || locName.match(/Tokio|Helsinki|New York|Amsterdam|Dubai/gi) === null) {
       emit('REQUEST_ALERT', ['Hupsista!', <p>Syöttämäsi kaupunki ei kelpaa. Ole hyvä ja valitse kaupunki listasta.</p>])
       emitOne('SUBMIT_STATE_CHANGE', true)

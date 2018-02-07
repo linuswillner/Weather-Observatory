@@ -87,7 +87,7 @@ export default class ControlToolbar extends React.Component {
               value={this.state.selection}
               disabled={this.state.tableViewEnabled}
               style={styles.menu}
-              labelStyle={this.state.tableViewEnabled ? styles.disabled : styles.label}
+              labelStyle={this.state.tableViewEnabled ? styles.disabled : styles.label} // If table is enabled, the selector has no use
               iconStyle={styles.label}
               selectedMenuItemStyle={styles.selected}
               targetOrigin={{ vertical: 'bottom', horizontal: 'left' }}
