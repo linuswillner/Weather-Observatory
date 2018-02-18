@@ -1,52 +1,54 @@
+If you wish to read this document in Finnish, click [here](README_FI.md).
+
 # reaktor-kesatyo-2018
 
-Reaktorin kesätyön 2018 ennakkotehtävään tehty säähavaintosovellus.
+This is a weather app made as a preparatory task for a summer job application to Reaktor.
 
-Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tietoa siitä miten tekninen toteutus on suoritettu, katso [DOC.md](DOC.md).
+This README describes the application in broad strokes. If you want more exact information about how the technical implementation has been achieved, see [DOC.md](DOC.md) (Only available in Finnish).
 
-## Struktuuri
+## Structure
 
 ```
 |
-├── bin/ - Kehityksessä käytettävät binääritiedostot
-│   └── rethinkdb.exe - Kehitykseen tarkoitettu RethinkDB-binääri
+├── bin/ - Development binaries
+│   └── rethinkdb.exe - RethinkDB binary for development use
 |
-├── client/ - Reactilla rakennettu web-applikaatio
-│   ├── assets/ - Kuvat sekä CSS
-│   ├── components/ - React-komponentit
-|   ├── layouts/ - Applikaation layoutti
-|   ├── system/ - Applikaation backend-koodi
-│   ├── App.jsx - Applikaation perusta
-│   ├── config.example.js - Client-puolen konfiguraatiotiedosto (Malli)
-│   ├── index.html - HTML-dokumenttipohja applikaatiolle
-│   └── index.jsx - Applikaation renderöinti
+├── client/ - React web app
+│   ├── assets/ - Images and CSS
+│   ├── components/ - React components
+|   ├── layouts/ - UI layouts
+|   ├── system/ - Backend code
+│   ├── App.jsx - Application root
+│   ├── config.example.js - Client-side configuration file (Example)
+│   ├── index.html - HTML entry point
+│   └── index.jsx - Application renderer
 |
-├── server/ - Expressillä toteutettu REST API tietosäilönä
-│   ├── db/ - Tietokantamoottori
-│   ├── routes/ - API-reitit
-│   ├── .env.example - Prosessimuuttujat production-tilaa varten (Malli)
-│   └── api.js - API-järjestelmän perusta
+├── server/ - Express API for data stroage
+│   ├── db/ - Database engine
+│   ├── routes/ - API routes
+│   ├── .env.example - Environment variables for production (Example)
+│   └── api.js - API root
 ```
 
-## Käynnistysskriptit
+## Scripts
 
-Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
+Before starting, make sure you have completed the following steps:
 
-- Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/reaktor-kesatyo-2018**
-- Luonut tiedostot **server/.env** ja **client/config.js** niiden mallien pohjalta
+- Cloned this repository with **git clone https://github.com/linuswillner/reaktor-kesatyo-2018**
+- Created **server/.env** and **client/config.js** based on their examples
 
-**npm start** käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
+**npm start**: Starts the Webpack dev server, after which the application is visible at http://localhost:8000.
 
-**npm run start-api**: käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
+**npm run start-api**: Starts the RethinkDB binary (Dev) and then the REST API. These can be inspected and tried with for instance Postman (https://getpostman.com) (API, http://localhost:8010) and the RethinkDB web interface (http://localhost:8080).
 
-**Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan. Muista myös luoda tietokanta **Weather** ja siihen taulukko **Observations**.
+**Note:** It is imperative that the API is started before the web app is started, otherwise the app will not display information before the API can respond. Remember to create a database named **Weather** and add a table named **Observations** to it as well.
 
-## Käytettyjä teknologioita
+## Technologies used
 
-Perustana on perinteinen React-applikaatio (React DOM, Babel, Webpack).
+As a base, a traditional React application is used (React DOM, Babel, Webpack).
 
-Projektin käyttöliittymä pohjautuu Googlen Material-designiin, joka on toteutettu material-ui-komponenttikirjastolla (http://material-ui.com). Käyttöliittymässä on myös käytössä Bootstrapin grid-järjestelmä (https://npmjs.com/package/react-grid-system).
+The user interface of this project is based on Google's Material design and uses the material-ui component library (http://material-ui.com). The UI also uses Bootstrap's grid system (https://npmjs.com/package/react-grid-system).
 
-Styleguidena on käytössä Standard (https://standardjs.com) ja lintterinä ESLint (https://eslint.org).
+This project uses the Standard style guide (https://standardjs.com) and ESLint (https://eslint.org).
 
-Tietokantana toimii RethinkDB (https://rethinkdb.com) ja client-server-kommunikaatio on suoritettu Express.js:llä (https://expressjs.com).
+RethinkDB (https://rethinkdb.com) is used for data storage, and client-server communication is done with Express.js (https://expressjs.com).
