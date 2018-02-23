@@ -17,6 +17,9 @@ jobs:
       - run:
           name: NPM test
           command: npm test
+      - run:
+          name: Create test build
+          command: npm run build
 
   deploy:
     machine:
@@ -24,8 +27,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Debug
-          command: ls
+          name: Create production build
+          command: npm run build
       - run:
           name: Deploy code to server
           command: scp -r ./public/* $DEPLOYMENT_USER@$DEPLOYMENT_HOST:$DEPLOYMENT_DIR
