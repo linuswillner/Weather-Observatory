@@ -1,11 +1,12 @@
 {
   "name": "reaktor-kesatyo-2018",
   "version": "1.0.0",
-  "description": "",
+  "description": "Weather information app for a Reaktor summer job application.",
   "main": "client/index.jsx",
   "scripts": {
     "start": "opn http://localhost:8000 && cross-env NODE_ENV=development webpack-dev-server",
     "start-api": "START CMD /k bin\\rethinkdb.exe && nodemon server/api.js",
+    "test": "eslint .",
     "build": "cross-env NODE_ENV=production webpack -p"
   },
   "keywords": [],
