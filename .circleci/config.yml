@@ -24,6 +24,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Debug
+          command: ls
+      - run:
           name: Deploy code to server
           command: scp -r ./public/* $DEPLOYMENT_USER@$DEPLOYMENT_HOST:$DEPLOYMENT_DIR
 
