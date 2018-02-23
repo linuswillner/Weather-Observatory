@@ -34,7 +34,7 @@ Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tiet
 
 Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
 
-- Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/reaktor-kesatyo-2018**
+- Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/Weather-Observatory**
 - Luonut tiedostot **server/.env** ja **client/config.js** niiden mallien pohjalta
 
 **npm start**: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.

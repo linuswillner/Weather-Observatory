@@ -34,7 +34,7 @@ This README describes the application in broad strokes. If you want more exact i
 
 Before starting, make sure you have completed the following steps:
 
-- Cloned this repository with **git clone https://github.com/linuswillner/reaktor-kesatyo-2018**
+- Cloned this repository with **git clone https://github.com/linuswillner/Weather-Observatory**
 - Created **server/.env** and **client/config.js** based on their examples
 
 **npm start**: Starts the Webpack dev server, after which the application is visible at http://localhost:8000.
