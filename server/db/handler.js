@@ -30,7 +30,7 @@ function connectionCheck () {
  */
 async function getAllData () {
   let res = await r.db(process.env.DB_NAME || 'Weather').table('Observations').run()
-  let locations = ['Tokio', 'Helsinki', 'New York', 'Amsterdam', 'Dubai']
+  let locations = ['Tokyo', 'Helsinki', 'New York', 'Amsterdam', 'Dubai']
 
   if (!res || res.length === 0) { // Initialise able
     for (let i = 0; i < locations.length; i++) {
@@ -44,7 +44,7 @@ async function getAllData () {
 
 /**
  * Get weather data for a location.
- * @param {String} locationName - The city to retrieve weather data for. (Tokio/Helsinki/New York/Amsterdam/Dubai)
+ * @param {String} locationName - The city to retrieve weather data for. (Tokyo/Helsinki/New York/Amsterdam/Dubai)
  * @returns {Object|null} - Weather data if it existed or was recently created, null if an error happened
  */
 async function getWeatherData (locationName) {
@@ -61,7 +61,7 @@ async function getWeatherData (locationName) {
 
 /**
  * Store weather data for a location.
- * @param {String} locationName - The city to update weather data for. (Tokio/Helsinki/New York/Amsterdam/Dubai)
+ * @param {String} locationName - The city to update weather data for. (Tokyo/Helsinki/New York/Amsterdam/Dubai)
  * @param {Number} temperature - Temperature observation.
  * @param {Number} createdAt - Date.now() of the observation.
  * @returns {Object<type: String, oldDoc: Object|null, newDoc: Object|null>|null}

@@ -48,16 +48,16 @@ export default class ErrorOverlay extends React.Component {
         open={this.state.open}
         contentStyle={styles.content}
       >
-        <h1>Nyt jokin on kunnolla pielessä...</h1>
-        <p style={styles.text}>Applikaatiossa tapahtui katastrofaalinen virhe jota se ei itse pysty korjaamaan. Lisätietoja alla.</p>
+        <h1>Something broke...</h1>
+        <p style={styles.text}>There was a catastrophic error in the application that cannot be self-repaired. More information below.</p>
         <p style={styles.error}>{this.state.error}</p>
-        <p style={styles.text}>Ole hyvä ja ota yhteyttä sivuston omistajaan ja anna hänelle seuraavat tiedot:</p>
+        <p style={styles.text}>Please contact the site owner and send them the following information:</p>
         <p>
-          Virhekoodi: <b>{this.state.errorCode}</b>
+          Error code: <b>{this.state.errorCode}</b>
           <br/>
-          Viesti: {this.state.errorMessage}
+          Message: {this.state.errorMessage}
         </p>
-        <p>Sivuston omistaja: <b>Linus Willner</b> (hello@linuswillner.me)</p>
+        <p>Site owner: <b>Linus Willner</b> (hello@linuswillner.me)</p>
       </Dialog>
     )
   }

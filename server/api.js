@@ -29,9 +29,7 @@ app.use(logger('dev')) // Logging
 app.use(bodyParser.urlencoded({ extended: false })) // Body parser
 app.use(bodyParser.json()) // Body parser
 app.use(cors()) // Enable CORS
-app.use(helmet({
-  noCache: true // Use Helmet with no cache
-}))
+app.use(helmet({ noCache: true })) // Use Helmet with no cache
 
 // If in production, require authentication
 if (process.env.NODE_ENV === 'production ') {

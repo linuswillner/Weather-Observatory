@@ -104,14 +104,14 @@ export default class ControlToolbar extends React.Component {
           {/* Add observation button */}
           <ToolbarGroup>
             <RaisedButton
-              label={'Lisää säähavainto'}
+              label={'Add observation'}
               onClick={() => { emitOne('REQUEST_DIALOG') }}
             />
           </ToolbarGroup>
           {/* Toggle between table and map view */}
           <ToolbarGroup>
             <Toggle
-              label={'Näytä taulukko'}
+              label={'Display table'}
               labelPosition={'right'}
               labelStyle={styles.label}
               thumbSwitchedStyle={styles.thumbOn}

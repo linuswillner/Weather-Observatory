@@ -51,11 +51,11 @@ export default class ObservationDialog extends React.Component {
     let temp = localStorage.getItem('temperature')
 
     // It's not feasible that these conditions will fire in normal usage - they're mostly proofing against tampering the local storage
-    if (!locName || locName.match(/Tokio|Helsinki|New York|Amsterdam|Dubai/gi) === null) {
-      emit('REQUEST_ALERT', ['Hupsista!', <p>Syöttämäsi kaupunki ei kelpaa. Ole hyvä ja valitse kaupunki listasta.</p>])
+    if (!locName || locName.match(/Tokyo|Helsinki|New York|Amsterdam|Dubai/gi) === null) {
+      emit('REQUEST_ALERT', ['Whoops!', <p>The location you entered is invalid. Please select a location from the list.</p>])
       emitOne('SUBMIT_STATE_CHANGE', true)
     } else if (!temp || isNaN(temp)) {
-      emit('REQUEST_ALERT', ['Hupsista!', <p>Syöttämäsi lämpötila ei kelpaa. Ole hyvä ja syötä lämpötila numerona kenttään.</p>])
+      emit('REQUEST_ALERT', ['Whoops!', <p>The temperature you entered is invalid. Please enter a number into the temperature field.</p>])
       emitOne('SUBMIT_STATE_CHANGE', true)
     } else {
       postWeatherInfo(locName, temp, Date.now())
@@ -75,13 +75,13 @@ export default class ObservationDialog extends React.Component {
 
     return (
       <Dialog
-        title={'Uusi säähavainto'}
+        title={'New observation'}
         modal={false}
         open={this.state.open}
         onRequestClose={this.close}
         actions={[
           <FlatButton
-            label={'Peruuta'}
+            label={'Cancel'}
             onClick={() => {
               this.setState({ selection: null }) // Empty the field for the next opening
               removeLocalStorageItems([ 'locationName', 'locationIndex', 'temperature' ]) // Purge cached info
@@ -89,7 +89,7 @@ export default class ObservationDialog extends React.Component {
             }}
           />,
           <FlatButton
-            label={'Tallenna'}
+            label={'Save'}
             style={this.state.disabled ? styles.submitDisabled : styles.submit}
             disabled={this.state.disabled}
             onClick={this.checkAndSubmit}

@@ -113,20 +113,20 @@ export default class LocationInfo extends React.Component {
         />
         <CardText>
           <p>
-            Lämpötila:
+            Temperature:
             <span style={this.determineHeatLevel(this.state.temperature)}>
               {` ${this.state.temperature ? this.state.temperature : '-'}`}
             </span>
           </p>
           <p>
-            Korkein lämpötila (24h):
+            Highest temp (24h):
             {/* If the data is older than 24 hours, don't style the span */}
             <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.highestTemp)}>
               {` ${this.state.highestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.highestTemp : '-'}`}
             </span>
           </p>
           <p>
-            Matalin lämpötila (24h):
+            Lowest temp (24h):
             {/* If the data is older than 24 hours, don't style the span */}
             <span style={isOlderThan24Hours(this.state.lastUpdate) ? {} : this.determineHeatLevel(this.state.lowestTemp)}>
               {` ${this.state.lowestTemp && isOlderThan24Hours(this.state.lastUpdate) === false ? this.state.lowestTemp : '-'}`}
@@ -134,7 +134,7 @@ export default class LocationInfo extends React.Component {
           </p>
           <p style={styles.tipText}>
             <br/>
-            Jos kentät ovat tyhjiä, ei tietoja ole kirjattu viimeisen 24 tunnin aikana.
+            If the fields are empty, no data has been recorded within the last 24 hours. Check back later!
           </p>
         </CardText>
         <CardActions>

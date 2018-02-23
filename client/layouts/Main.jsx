@@ -48,7 +48,7 @@ export default class Main extends React.Component {
     dispatcher.on('TOGGLE_TABLE_VIEW', () => {
       this.toggleTableView()
       if (!localStorage.getItem('disableTableToast')) {
-        emit('REQUEST_TOAST', ['Jos kentät ovat tyhjiä, ei tietoja ole kirjattu viimeisen 24 tunnin aikana.', 'Sulje'])
+        emit('REQUEST_TOAST', ['If the fields are empty, no data has been recorded within the last 24 hours.', 'Close'])
         localStorage.setItem('disableTableToast', true) // Only show once
       }
     })

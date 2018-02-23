@@ -78,6 +78,10 @@ export default class Map extends React.Component {
             lng: config.map.markers[3].lng
           }} // TODO: Stop this component from whining when it's re-rendered and thus defaultCenter is reassigned
           center={this.state.center}
+          options={{
+            disableDefaultUI: true,
+            scrollwheel: false
+          }}
           bootstrapURLKeys={{
             key: config.map.apiKey,
             region: 'fi',

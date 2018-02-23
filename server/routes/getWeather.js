@@ -7,10 +7,10 @@ async function getWeather (req, res) {
       [AUTO] location (String) - The location for which weather data is being requested
   */
 
-  const cityRegex = /Tokio|Helsinki|New York|Amsterdam|Dubai/gi
+  const cityRegex = /Tokyo|Helsinki|New York|Amsterdam|Dubai/gi
 
   if (req.params.location.match(cityRegex) === null) { // Location validity check
-    res.status(400).send({ message: 'Location was not one of the following: Tokio, Helsinki, New York, Amsterdam, Dubai' })
+    res.status(400).send({ message: 'Location was not one of the following: Tokyo, Helsinki, New York, Amsterdam, Dubai' })
   } else {
     let data = await getWeatherData(req.params.location)
 

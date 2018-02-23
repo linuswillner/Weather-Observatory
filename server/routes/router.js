@@ -7,7 +7,7 @@ const getWeather = require('./getWeather.js')
 const storeWeather = require('./storeWeather.js')
 
 router.all('/', (req, res) => {
-  res.status(400).send('No location provided!')
+  res.status(400).send({ message: 'No location provided!' })
 })
 
 router.get('/ping', (req, res) => {

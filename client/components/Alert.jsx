@@ -35,7 +35,7 @@ export default class Alert extends React.Component {
   render () {
     dispatcher.once('REQUEST_ALERT', (args) => {
       this.setState({
-        title: args[0] || 'Virhe',
+        title: args[0] || 'Error',
         content: args[1]
       })
       this.open()
@@ -48,7 +48,7 @@ export default class Alert extends React.Component {
         onRequestClose={this.close}
         actions={
           <FlatButton
-            label={'Sulje'}
+            label={'Close'}
             styles={styles.button}
             onClick={this.close}
           />

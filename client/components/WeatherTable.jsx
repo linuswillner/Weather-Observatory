@@ -31,16 +31,26 @@ export default class WeatherTable extends React.Component {
   generateColumns () {
     return config.map.markers.map(location => {
       let data = localStorage.getItem(location.name)
-      if (data) data = JSON.parse(data)
-      return (
-        <WeatherTableRow
-          location={location.name}
-          currentTemp={data.temperature ? data.temperature : '-'}
-          highestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.highest : '-'}
-          lowestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.lowest : '-' }
-          key={location.name + '-' + generateComponentKey()}
-        />
-      )
+      if (data) {
+        data = JSON.parse(data)
+        return (
+          <WeatherTableRow
+            location={location.name}
+            currentTemp={data.temperature ? data.temperature : '-'}
+            highestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.highest : '-'}
+            lowestTemp={data.highest && isOlderThan24Hours(data.lastUpdate) === false ? data.lowest : '-' }
+            key={location.name + '-' + generateComponentKey()}
+          />
+        )
+      } else {
+        // Write dummy data and reload so the page can load in peace
+        localStorage.setItem('Tokyo', '{"highest": null, "id": "Tokyo", "lastUpdate": null, "lowest": null, "temperature": null}')
+        localStorage.setItem('Helsinki', '{"highest": null, "id": "Helsinki", "lastUpdate": null, "lowest": null, "temperature": null}')
+        localStorage.setItem('New York', '{"highest": null, "id": "New York", "lastUpdate": null, "lowest": null, "temperature": null}')
+        localStorage.setItem('Amsterdam', '{"highest": null, "id": "Amsterdam", "lastUpdate": null, "lowest": null, "temperature": null}')
+        localStorage.setItem('Dubai', '{"highest": null, "id": "Dubai", "lastUpdate": null, "lowest": null, "temperature": null}')
+        window.location.reload(true)
+      }
     })
   }
 

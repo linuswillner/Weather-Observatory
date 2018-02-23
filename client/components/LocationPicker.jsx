@@ -71,7 +71,7 @@ export default class LocationPicker extends React.Component {
 
     return (
       <SelectField
-        floatingLabelText={'Kaupunki'}
+        floatingLabelText={'Location'}
         floatingLabelFixed={true}
         floatingLabelFocusStyle={styles.labelFocused}
         underlineFocusStyle={styles.underlineFocused}
@@ -81,7 +81,7 @@ export default class LocationPicker extends React.Component {
           // Using -- operand to correct the offset created by the null field
           this.select(--value)
         }}
-        errorText={this.state.nulled && 'Ole hyvä ja valitse kaupunki.'}
+        errorText={this.state.nulled && 'Please select a location.'}
       >
         <MenuItem value={null} primaryText={''}/>
         {this.generateList()}

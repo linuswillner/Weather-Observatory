@@ -62,13 +62,13 @@ export default class TemperatureField extends React.Component {
   render () {
     return (
       <TextField
-        floatingLabelText={'Lämpötila (°C)'}
+        floatingLabelText={'Temperature (°C)'}
         floatingLabelFixed={true}
         type={'number'}
         errorText={
-          (this.state.noTemp && 'Ole hyvä ja syötä lämpötila.') ||
-          (this.state.modified && 'Antamasi lämpötila on viallinen, päivitä sivu ja yritä uudelleen.') ||
-          (this.state.invalid && 'Antamasi lämpötila on virheellinen, ole hyvä ja syötä mahdollinen lämpötila.')
+          (this.state.noTemp && 'Please enter a temperature.') ||
+          (this.state.modified && 'The temperature you entered is invalid, refresh the page and try again.') ||
+          (this.state.invalid && 'The temperature you entered is too high or too low, please enter a feasible temperature.')
         }
         onChange={(event, newValue) => {
           this.check(newValue)

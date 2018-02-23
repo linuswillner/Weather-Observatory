@@ -16,13 +16,13 @@ function ping () {
     .catch(err => {
       if (err.message.includes('the network is offline')) {
         emit('REQUEST_ERROR_OVERLAY', [
-          'Yhteyttä API:hin ei voitu muodostaa. (net::ERR_CONNECTION_REFUSED)',
+          'Could not connect to the API. (net::ERR_CONNECTION_REFUSED)',
           err.message,
           'Lynx'
         ])
       } else {
         emit('REQUEST_ERROR_OVERLAY', [
-          'API:ssa tapahtui virhe. (Unknown exception)',
+          'There was an error in the API. (Unknown Exception)',
           err.message,
           'Canis'
         ])
@@ -43,8 +43,8 @@ function getWeatherInfo (location) {
       emit('REQUEST_ALERT', [
         'Virhe',
         [
-          <p>Applikaatiossa tapahtui virhe. Ole hyvä ja ilmoita tästä sivuston omistajalle (<b>hello@linuswillner.me</b>).</p>,
-          <p>Lähetä seuraava ilmoituksesi mukana.</p>,
+          <p>An error occurred in the application. Please inform the site owner of this occurrence (<b>hello@linuswillner.me</b>).</p>,
+          <p>Submit the following data with the report.</p>,
           <p><b>getWeatherInfo:</b> {err.message}</p>
         ]
       ])
@@ -83,8 +83,8 @@ function postWeatherInfo (location, temperature, createdAt) {
       emit('REQUEST_ALERT', [
         'Virhe',
         [
-          <p>Applikaatiossa tapahtui virhe. Ole hyvä ja ilmoita tästä sivuston omistajalle (<b>hello@linuswillner.me</b>).</p>,
-          <p>Lähetä seuraava ilmoituksesi mukana.</p>,
+          <p>An error occurred in the application. Please inform the site owner of this occurrence (<b>hello@linuswillner.me</b>).</p>,
+          <p>Submit the following data with the report.</p>,
           <p><b>postWeatherInfo:</b> {err.message}</p>
         ]
       ])

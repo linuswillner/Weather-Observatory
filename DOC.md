@@ -1,12 +1,30 @@
 # Teknisiä selityksiä
 
-Tässä dokumentissa valotan työni teknisiä konsepteja sekä miten koko sovellus toimii. On merkitsemisen arvoista että tämä dokumentti on suomeksi (Johtuen siitä että se on osa hakemustani), kun taas koodissa kommentit ovat englanniksi.
+Tässä dokumentissa valotan työni teknisiä konsepteja sekä miten koko sovellus toimii. On merkitsemisen arvoista että tämä dokumentti on suomeksi (Johtuen siitä että se on osa hakemustani), mutta sovelluksen yleiskieli on englanti.
+
+## Johdanto
+
+Tätä applikaatiota suunniteltaessa muotoilin itselleni seuraavan ongelman, joka minun oli tarkoitus ratkaista: **Miten rakennan applikaation jota voi käyttää niin Matti Meikäläinen kuin Timo Tiedemieskin, ja molemmat voivat saada saman verran tietoa irti siitä?**
+
+Tarkemmin sanottuna tämä tarkoitti seuraavaa:
+
+- Applikaation on oltava helppokäyttöinen ja selkeä, sen antama tieto täytyy voida ymmärtää yhdellä vilkaisulla.
+- Ylläolevan lisäksi käyttöliittymän on oltava kiinnostava.
+- Säätiedot täytyvät pitää kutinsa niin tieteellisessä kuin jokapäiväisessäkin tarkoituksessa. (Eli Kelvin- ja Fahrenheit-asteet tuskin hyödyttävät Matti Meikäläistä)
+
+Teknisellä puolella asetin itselleni seuraavat tavoitteet:
+
+- Applikaation lataamisen, käyttöönoton ja julkisen käytön on oltava helppoa ja nopeaa.
+- Koodin on oltava helposti ymmärrettävää ja luettavaa.
+- Applikaatiota pitää voida muuttaa tarpeen mukaan (Eli havaintopisteiden vaihtaminen lennossa pitää onnistua).
+
+Rakensin applikaationi nämä asiat mielessä pitäen, ja tuloksena on Weather Observatory. Seuraavassa valotan tarkemmin työni teknisiä yksityiskohtia ja ratkaisuja ongelmiin joita kohtasin.
 
 ## Web-applikaatio
 
 ### Eventit
 
-Yleistoteutus on suoritettu Reactilla ja sen perustoimintoja kuten props- ja state-järjestelmiä käytetään useasti. Tässä projektissa olen tavallisesta poiketen rakentanut järjestelmän jossa eri komponentit "keskustelevat" toistensa kanssa.
+Yleistoteutus on suoritettu Reactilla ja sen perustoimintoja kuten props- ja state-järjestelmiä käytetään useasti. Tässä projektissa olen sen lisäksi rakentanut järjestelmän jossa eri komponentit "keskustelevat" toistensa kanssa. En halunnut käyttää Reduxia ensinnäkin koska kyseessä on pieni projekti, ja toiseksi globaalin staten käyttäminen ei aivan sopinut käyttötarkoitukseeni.
 
 Käytännössä kyseessä on browser-käyttöön tarkoitettu EventEmitteri, Node.js-tyyliin. Sen koodi tulee NPM-paketista [wolfy87-eventemitter](https://npmjs.com/wolfy87-eventemitter), ja tässä projektissa sitä on abstraktoitu hyvin kevyesti käytön helpottamiseksi ([client/system/dispatcher.js](client/system/dispatcher.js)).
 
@@ -36,7 +54,7 @@ Suurin osa komponenteista renderöidään ja näytetään vierailijalle sivun la
 
 Vaikka suurin osa tyyleistä ja CSS:stä tulee Material-UI-järjestelmästä, osa on itse määriteltyä tätä applikaatiota varten. Tyylitiedot ja CSS löytyvät komponenteista itsestään. Syy tähän on organisaatio - on helppo muistaa mikä tyylielementti kuuluu mihinkin, jos tyylitiedot ovat komponentin sisällä.
 
-Poikkeukset tähän sääntöön ovat Roboto-fontti, Material Icons-fontti sekä sivuston taustaväri. Sivuston taustavärin on peitettävä koko sivu (Komponentit eivät tätä mahdollista), ja fonttien on oltava käytettävissä joka paikassa. Täten nämä tyylitiedot ovat tiedostossa [client/assets/css/common.css](client/assets/css/common.css).
+Poikkeukset ylläolevaan sääntöön ovat Roboto-fontti, Material Icons-fontti sekä sivuston taustaväri. Sivuston taustavärin on peitettävä koko sivu (Komponentit eivät tätä mahdollista), ja fonttien on oltava käytettävissä joka paikassa. Täten nämä tyylitiedot ovat tiedostossa [client/assets/css/common.css](client/assets/css/common.css).
 
 ### Client-puolen turvallisuus ja syöttövalidaatio
 
@@ -58,6 +76,6 @@ Koska kyseessä on suhteellisen yksinkertainen web-sovellus, vaatii API ainoasta
 
 **Huomautus:** Kehitystilassa (Kun NODE_ENV = development) API ei vaadi tunnistautumista yksinkertaisuuden vuoksi. Vasta produktiotilassa tunnistautuminen kytketään päälle.
 
-Jos käyttäjä kaikesta huolimatta löytäisi API:n, suorittaa API saman syöttövalidaation kuin client-puolella ennen tallennusta tietokantaan (Vrt. havaintodialogia ([client/components/ObservationDialog.jsx](client/components/ObservationDialog.jsx), funktio checkAndSubmit(), viivat 47-62) sekä säätietojen tallennusta API:ssa ([server/routes/storeWeather.js](server/routes/storeWeather.js), viivat 11-20)).
+Jos käyttäjä kaikesta huolimatta löytäisi API:n, suorittaa API saman syöttövalidaation kuin client-puolella ennen tallennusta tietokantaan (Vrt. havaintodialogia ([client/components/ObservationDialog.jsx](client/components/ObservationDialog.jsx), rivit 47-62) sekä säätietojen tallennusta API:ssa ([server/routes/storeWeather.js](server/routes/storeWeather.js), rivit 11-20)).
 
-RethinkDB-tietokantaa käytetään hard durability-tilassa (https://rethinkdb.com/docs/consistency/#settings). Lisäksi sille voidaan määrittää erillinen osoite serverin .env-konfiguraatiossa. Tämä tarkoittaa sitä, että se voidaan asettaa serverille joka on erillään API-serveristä, täten lisäten datan turvallisuustasoa. RethinkDB-serveriä voidaan myös käyttää cluster-tilassa, mutta sitä en ole tässä tehnyt.
+RethinkDB-tietokantaa käytetään hard durability-tilassa (https://rethinkdb.com/docs/consistency/#settings). Lisäksi sille voidaan määrittää erillinen osoite serverin .env-konfiguraatiossa. Tämä tarkoittaa sitä, että se voidaan asettaa serverille joka on erillään API-serveristä, täten lisäten datan turvallisuustasoa. RethinkDB-serveriä voidaan myös käyttää cluster-tilassa maksimoiden sen turvallisuustason.

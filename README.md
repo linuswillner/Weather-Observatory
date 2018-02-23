@@ -1,6 +1,6 @@
 If you wish to read this document in Finnish, click [here](README_FI.md).
 
-# reaktor-kesatyo-2018
+# Weather Observatory
 
 This is a weather app made as a preparatory task for a summer job application to Reaktor.
 
@@ -45,7 +45,7 @@ Before starting, make sure you have completed the following steps:
 
 ## Technologies used
 
-As a base, a traditional React application is used (React DOM, Babel, Webpack).
+Behind the scenes, the application uses React (React DOM, Babel, Webpack).
 
 The user interface of this project is based on Google's Material design and uses the material-ui component library (http://material-ui.com). The UI also uses Bootstrap's grid system (https://npmjs.com/package/react-grid-system).
 
