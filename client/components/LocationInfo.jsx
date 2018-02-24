@@ -140,7 +140,7 @@ export default class LocationInfo extends React.Component {
         <CardActions>
           <FlatButton
             icon={<i className={'material-icons'}>add_circle_outline</i>}
-            label={'Lisää havainto'}
+            label={'Add observation'}
             onClick={() => { emitOne('REQUEST_DIALOG', this.props.location) }}
           />
         </CardActions>
