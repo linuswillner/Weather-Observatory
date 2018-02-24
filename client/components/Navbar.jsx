@@ -1,5 +1,5 @@
 // Main navbar
-import React from 'React'
+import React from 'react'
 import AppBar from 'material-ui/AppBar'
 import * as Colors from 'material-ui/styles/colors'
 import Clock from 'react-live-clock'
