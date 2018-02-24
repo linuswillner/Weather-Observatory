@@ -36,7 +36,7 @@ Before starting, make sure you have completed the following steps:
 
 - Cloned this repository with **git clone https://github.com/linuswillner/Weather-Observatory**
 - Installed dependencies via **npm install**
-- Created **server/.env** and **client/config.js** based on their examples
+- Created **.env** and **client/config.js** based on their examples
 - Created the database via **npm run dbcreate**
 
 **npm start**: Starts the Webpack dev server, after which the application is visible at http://localhost:8000.

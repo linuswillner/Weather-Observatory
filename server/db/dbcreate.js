@@ -1,5 +1,5 @@
 const Dash = require('rethinkdbdash')
-require('dotenv').load()
+require('dotenv').config()
 require('colors')
 
 console.log('Initialising...'.green)

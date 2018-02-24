@@ -36,7 +36,7 @@ Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
 
 - Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/Weather-Observatory**
 - Asentanut dependencyt komennolla **npm install**
-- Luonut tiedostot **server/.env** ja **client/config.js** niiden mallien pohjalta
+- Luonut tiedostot **.env** ja **client/config.js** niiden mallien pohjalta
 - Luonut tietokannan komennolla **npm run dbcreate**
 
 **npm start**: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.

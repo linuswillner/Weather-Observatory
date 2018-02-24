@@ -14,4 +14,4 @@ rethinkdb_data
 
 # Configuration files
 client/config.js
-server/.env
+.env

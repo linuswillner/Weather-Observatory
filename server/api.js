@@ -12,7 +12,7 @@ const colors = require('colors')
 process.title = 'Weather API'
 
 // Use env vars in production
-if (process.env.NODE_ENV === 'production') require('dotenv').load()
+if (process.env.NODE_ENV === 'production') require('dotenv').config()
 else console.log('Running in development, not loading environment variables.'.yellow)
 
 // Router
@@ -32,15 +32,9 @@ app.use(cors()) // Enable CORS
 app.use(helmet({ noCache: true })) // Use Helmet with no cache
 
 // If in production, require authentication
-if (process.env.NODE_ENV === 'production ') {
-  let user = process.env.API_USER
-  let pass = process.env.API_PASS
-
-  app.use(basicAuth({
-    users: {
-      user: pass
-    }
-  }))
+if (process.env.NODE_ENV === 'production') {
+  let users = { [process.env.API_USER]: process.env.API_PASS }
+  app.use(basicAuth({ users }))
 }
 
 // Error handling
