@@ -80,7 +80,9 @@ export default class Map extends React.Component {
           center={this.state.center}
           options={{
             disableDefaultUI: true,
-            scrollwheel: false
+            scrollwheel: false,
+            disableDoubleClickZoom: true,
+            scaleControl: false
           }}
           bootstrapURLKeys={{
             key: config.map.apiKey,

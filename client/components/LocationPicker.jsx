@@ -27,7 +27,7 @@ const styles = {
 export default class LocationPicker extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { selection: this.props.selection || null, nulled: false }
+    this.state = { selection: this.props.selection, nulled: false }
     this.select = this.select.bind(this)
   }
 
