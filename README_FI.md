@@ -35,13 +35,15 @@ Tämä README-tiedosto kertoo sovelluksesta yleisesti. Jos haluat tarkempaa tiet
 Ennen käynnistystä, tarkista että olet tehnyt seuraavat asiat:
 
 - Kloonannut tämän repositorion komennolla **git clone https://github.com/linuswillner/Weather-Observatory**
+- Asentanut dependencyt komennolla **npm install**
 - Luonut tiedostot **server/.env** ja **client/config.js** niiden mallien pohjalta
+- Luonut tietokannan komennolla **npm run dbcreate**
 
 **npm start**: Käynnistää Webpackin dev-serverin jonka jälkeen applikaatio on näkyvissä osoitteessa http://localhost:8000.
 
 **npm run start-api**: Käynnistää kehitystilaan tarkoitetun RethinkDB-serverin ja sen jälkeen REST API:n. Näitä voi tarkastella ja kokeilla esimerkiksi Postmanilla (https://getpostman.com) (API, http://localhost:8010) ja RethinkDB:n oman web-dashboardin kautta (http://localhost:8080).
 
-**Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan. Muista myös luoda tietokanta **Weather** ja siihen taulukko **Observations**.
+**Huomautus:** On tärkeää että API:n käynnistys suoritetaan ennen web-applikaation käynnistystä, muutoin ohjelma ei näytä tietoja ennenkuin API pystyy vastaamaan.
 
 ## Käytettyjä teknologioita
 

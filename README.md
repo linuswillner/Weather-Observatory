@@ -35,13 +35,15 @@ This README describes the application in broad strokes. If you want more exact i
 Before starting, make sure you have completed the following steps:
 
 - Cloned this repository with **git clone https://github.com/linuswillner/Weather-Observatory**
+- Installed dependencies via **npm install**
 - Created **server/.env** and **client/config.js** based on their examples
+- Created the database via **npm run dbcreate**
 
 **npm start**: Starts the Webpack dev server, after which the application is visible at http://localhost:8000.
 
 **npm run start-api**: Starts the RethinkDB binary (Dev) and then the REST API. These can be inspected and tried with for instance Postman (https://getpostman.com) (API, http://localhost:8010) and the RethinkDB web interface (http://localhost:8080).
 
-**Note:** It is imperative that the API is started before the web app is started, otherwise the app will not display information before the API can respond. Remember to create a database named **Weather** and add a table named **Observations** to it as well.
+**Note:** It is imperative that the API is started before the web app is started, otherwise the app will not display information before the API can respond.
 
 ## Technologies used
 

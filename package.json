@@ -7,6 +7,7 @@
     "start": "opn http://localhost:8000 && cross-env NODE_ENV=development webpack-dev-server",
     "start-api": "START CMD /k bin\\rethinkdb.exe && nodemon server/api.js",
     "test": "eslint .",
+    "dbcreate": "node server/db/dbcreate.js",
     "build": "cross-env NODE_ENV=production webpack -p"
   },
   "keywords": [],
