@@ -2,7 +2,7 @@ import * as SA from 'superagent'
 import * as config from '../config'
 import { emit, emitOne } from './dispatcher'
 
-const baseUrl = `http://${config.api.url}`
+const baseUrl = config.api.url
 
 function ping () {
   SA

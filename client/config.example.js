@@ -14,7 +14,7 @@ config.map = {
 }
 
 config.api = { // Proprietary API configuration
-  url: 'localhost:8000',
+  url: 'http://localhost:8000',
   user: 'something',
   pass: 'something'
 }
