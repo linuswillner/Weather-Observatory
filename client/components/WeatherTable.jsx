@@ -76,10 +76,10 @@ export default class WeatherTable extends React.Component {
           >
             {/* Header columns */}
             <TableRow>
-              <TableHeaderColumn>Kaupunki</TableHeaderColumn>
-              <TableHeaderColumn>Lämpötila</TableHeaderColumn>
-              <TableHeaderColumn>Ylin (24h)</TableHeaderColumn>
-              <TableHeaderColumn>Alin (24h)</TableHeaderColumn>
+              <TableHeaderColumn>Location</TableHeaderColumn>
+              <TableHeaderColumn>Temperature</TableHeaderColumn>
+              <TableHeaderColumn>Highest (24h)</TableHeaderColumn>
+              <TableHeaderColumn>Lowest (24h)</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           {/* Body */}
